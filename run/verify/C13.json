@@ -1,0 +1,23 @@
+{
+  "claim_id": "C13",
+  "status": "match",
+  "structured": {
+    "replicated_value": {
+      "correlation": 0.947,
+      "level_difference_log_points": 32.0
+    },
+    "paper_value": {
+      "correlation": 0.96,
+      "level_difference_log_points": 31
+    },
+    "uncertainty": null,
+    "value_found": true
+  },
+  "rationale": "Plan step 7 (figure4_compare.py) reproduced the Figure 4 cross-check and wrote output/figure4.json, which reports corr_F_UE = 0.9474 and mean_logdiff_F_UE = 0.32046 (log units) over the overlapping quarterly sample 1967.25-2004.75 (n=151 quarters). Converting the log-level difference to log points gives 32.0, consistent with the paper's ~31. The correlation 0.9474 vs. the paper's 0.96 is a 1.3% relative error, and the level difference 32.0 vs. 31 log points is a 3.4% relative error \u2014 both within the 5% match band. F_t sits about 0.32 log above Lambda^UE (positive difference), matching the claim that F_t is consistently ~31 log points higher. The single fix recorded in fix_severity.json (a --splice_tail flag to extend the full sample past 2005M1) is a data-extension change that defaults off and does not affect this overlapping-sample UE comparison, so it does not undermine the produced result.",
+  "evidence_refs": [
+    "/workspace/output/replication/codebase/output/figure4.json",
+    "/workspace/output/analyze/replication_plan.json",
+    "/workspace/output/assess/fix_severity.json"
+  ],
+  "graded_by": "agent"
+}

@@ -1,0 +1,37 @@
+{
+  "planned_steps": 7,
+  "executed_steps": 7,
+  "missing_step_ids": [],
+  "succeeded_steps": 7,
+  "failed_steps": 0,
+  "failed_step_ids": [],
+  "exit_codes": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0
+  },
+  "last_step_failed": false,
+  "steps_with_output_files": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "steps_without_output_files": [],
+  "total_output_files": 42,
+  "repeated_commands": {},
+  "max_command_repeat": 1,
+  "transcript_tool_calls": 49,
+  "max_consecutive_tool_repeat": 1,
+  "max_consecutive_tool_call": "",
+  "total_fixes_applied": 1,
+  "total_duration_seconds": 0.0,
+  "no_evidence": false
+}

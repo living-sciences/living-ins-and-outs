@@ -1,0 +1,31 @@
+{
+  "claim_id": "C10",
+  "status": "match",
+  "structured": {
+    "file_exists": false,
+    "evidence_found": true,
+    "file_path_checked": [
+      "output/figure1.pdf",
+      "output/replication/codebase/output/two_state_1948_2010/figure1.pdf",
+      "output/replication/codebase/output/two_state/figure1.pdf"
+    ],
+    "structural_features_present": [
+      "two-panel layout (F_t top, X_t/X-tilde_t bottom)",
+      "top panel F_t ranging ~0.2-0.65, high in early-1950s (~0.6-0.65)",
+      "F_t cyclical with recession troughs, falling sharply to ~0.18-0.2 around 2009",
+      "bottom panel solid X_t line (~0.02-0.048) lying above dashed X-tilde_t line",
+      "both X_t and X-tilde_t peak in the early 1980s and decline thereafter",
+      "X-tilde_t labeled 'naive, u^s/e' (time-aggregation-ignoring), illustrating level and cyclicality effects",
+      "x-axis spanning 1948-2010 (1948Q1-2010Q4)"
+    ],
+    "structural_features_missing": [],
+    "structural_match": true
+  },
+  "rationale": "The claim's Figure 1 was reproduced at output/replication/codebase/output/two_state_1948_2010/figure1.pdf, which matches the claim's exact 1948Q1-2010Q4 span (step 2/step 4 of the plan, verifies C10). The exact expected_output_file output/figure1.pdf does not exist (figures are emitted under output/two_state_1948_2010/ and output/two_state/), but a fully relevant figure was produced. The top panel shows F_t roughly spanning 0.18-0.65, high in the early 1950s (~0.6-0.65), cyclical with clear recession troughs, and falling sharply to ~0.2 around 2009 \u2014 exactly as described. The bottom panel shows a solid red X_t line (~0.02-0.048) lying consistently above the dashed green X-tilde_t line labeled 'naive, u^s/e'; both peak in the early 1980s and decline thereafter, illustrating the level and cyclicality effects of time aggregation. All described structural features are present, so this is a structural match. (The shorter 1951-2005 variant at output/two_state/figure1.pdf corroborates but does not cover the full claimed span.)",
+  "evidence_refs": [
+    "output/replication/codebase/output/two_state_1948_2010/figure1.pdf",
+    "output/replication/codebase/output/two_state/figure1.pdf",
+    "output/analyze/replication_plan.json"
+  ],
+  "graded_by": "agent"
+}

@@ -1,0 +1,24 @@
+{
+  "claim_id": "C14",
+  "status": "match",
+  "structured": {
+    "replicated_value": {
+      "correlation": 0.85,
+      "level_difference_log_points": 58.6
+    },
+    "paper_value": {
+      "correlation": 0.83,
+      "level_difference_log_points": 56
+    },
+    "uncertainty": null,
+    "value_found": true
+  },
+  "rationale": "Plan step 7 (figure4_compare.py, verifies C14) produced output/figure4.json with corr_X_EU=0.8503 and mean_logdiff_X_EU=0.5862 (i.e. X_t averages ~58.6 log points above Lambda^EU) on the overlapping quarterly sample 1967.25-2004.75 (n=151 quarters). The paper reports a correlation of 0.83 (replicated 0.8503; 2.4% relative error, within 5%) and a level difference of 56 log points = 0.56 log units (replicated 0.586 log units / 58.6 log points; 4.7% relative error, within 5%). Both quantities fall inside the 5% match band. The one fix flagged in fix_severity.json concerns an opt-in --splice_tail sample-extension for the 1948-2010 full-sample results and does not affect this overlapping-sample cross-check.",
+  "evidence_refs": [
+    "output/replication/codebase/output/figure4.json",
+    "output/analyze/replication_plan.json",
+    "output/replication/codebase/figure4_compare.py",
+    "output/assess/fix_severity.json"
+  ],
+  "graded_by": "agent"
+}

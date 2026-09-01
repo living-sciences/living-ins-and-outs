@@ -1,0 +1,9 @@
+{
+  "claim_id": "C24",
+  "status": "not_attempted",
+  "structured": {},
+  "rationale": "No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Short-term-unemployment shares in the full CPS vs incoming rotation groups (1976-1993 vs 1994-2010) require CPS microdata tabulated by rotation group; only a single derived aggregate share (shortadj.txt) is shipped, not the rotation-group tabulation this claim compares.",
+  "evidence_refs": [],
+  "not_attempted_reason": "authors_missing",
+  "graded_by": "deterministic"
+}

@@ -1,0 +1,530 @@
+{
+  "paper": {
+    "title": "Reassessing the Ins and Outs of Unemployment",
+    "arxiv_id": null,
+    "year": 2012,
+    "authors": [
+      "Shimer"
+    ]
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "description": "Since 1948, fluctuations in the job finding probability account for about three-quarters (77 percent) of the fluctuations in the U.S. unemployment rate, and fluctuations in the employment exit probability account for about one-quarter (24 percent).",
+      "type": "scalar",
+      "tier": "headline",
+      "verification": "Locate the reproduced Table 1 decomposition (produced from the job finding rate series in find.dat and the employment exit rate series in sep.dat, HP-filtered with smoothing parameter 1e5). Read column 1 (all workers, 1948-2010): the top-row entry (contribution of x\u0304/(x\u0304+f_t) to unemployment-rate variance) should be ~0.77 and the second-row entry (contribution of x_t/(x_t+f\u0304)) should be ~0.24. This is the paper's central quantitative result.",
+      "paper_value": {
+        "job_finding_share": 0.77,
+        "employment_exit_share": 0.24
+      },
+      "units": "fraction of unemployment-rate variance (regression coefficient)",
+      "expected_output_file": "output/table1.csv",
+      "provenance": {
+        "section": "2.2 Measurement / Table 1",
+        "page": 9,
+        "quote": "the covariance of the cyclical components ... accounts for about three-quarters of the variance ... while the covariance ... accounts for the remaining quarter (Table 1, column 1)."
+      },
+      "notes": "Abstract phrases these as 'three-quarters' and 'one-quarter'. The two rows do not sum exactly to 1 because it is not an exact decomposition."
+    },
+    {
+      "id": "C2",
+      "description": "Since 1987, the job finding probability accounts for virtually all (90 percent) of the fluctuations in the unemployment rate, with the employment exit probability accounting for about 10 percent.",
+      "type": "scalar",
+      "tier": "headline",
+      "verification": "Read column 4 of the reproduced Table 1 (all workers, 1987-2010). The job-finding contribution should be ~0.90 and the employment-exit contribution ~0.10, showing the relative importance of the job finding rate has risen over time.",
+      "paper_value": {
+        "job_finding_share": 0.9,
+        "employment_exit_share": 0.1
+      },
+      "units": "fraction of unemployment-rate variance (regression coefficient)",
+      "expected_output_file": "output/table1.csv",
+      "provenance": {
+        "section": "Introduction / Table 1",
+        "page": 1,
+        "quote": "movements in the job finding probability account for 77 percent of fluctuations in the unemployment rate since 1948, rising to 90 percent after 1987."
+      }
+    },
+    {
+      "id": "C3",
+      "description": "The job finding probability is strongly procyclical (highly variable at business cycle frequencies) while the employment exit probability is comparatively acyclic, especially during the last two decades.",
+      "type": "qualitative",
+      "tier": "headline",
+      "verification": "From the reproduced job finding probability F_t (find.dat) and employment exit probability X_t (sep.dat) quarterly series and their decompositions (Table 1, Figures 1-2): confirm that F_t exhibits large business-cycle fluctuations that track the unemployment rate, whereas X_t shows much smaller cyclical variation, particularly from the mid-1980s onward. A match is a clear qualitative demonstration that the job finding rate is the dominant cyclical driver of unemployment.",
+      "paper_value": "Job finding probability drives cyclical unemployment; employment exit probability is comparatively acyclic and has secularly declined.",
+      "provenance": {
+        "section": "Abstract / Introduction",
+        "page": 1,
+        "quote": "there are substantial fluctuations in unemployed workers' job finding probability at business cycle frequencies, while the probability a worker exits employment is comparatively acyclic."
+      }
+    },
+    {
+      "id": "C4",
+      "description": "Table 1 decomposition of the contribution of the job finding and employment exit rates to unemployment-rate fluctuations across five samples/periods.",
+      "type": "table",
+      "tier": "supporting",
+      "verification": "Compare the reproduced Table 1 (all five columns) cell-by-cell. Each column corresponds to a sample/period; the top row is the job-finding contribution and the bottom row the employment-exit contribution. For prime-age men (column 5) the job finding contribution (0.69) should be more than twice the exit contribution (0.32).",
+      "paper_value": {
+        "columns": [
+          "all workers 1948-2010",
+          "all workers 1967-2010",
+          "all workers 1976-2010",
+          "all workers 1987-2010",
+          "men 25-54 1976-2010"
+        ],
+        "rows": [
+          {
+            "label": "x-bar/(x-bar+f_t) [job finding contribution]",
+            "values": [
+              0.77,
+              0.83,
+              0.85,
+              0.9,
+              0.69
+            ]
+          },
+          {
+            "label": "x_t/(x_t+f-bar) [employment exit contribution]",
+            "values": [
+              0.24,
+              0.17,
+              0.15,
+              0.1,
+              0.32
+            ]
+          }
+        ]
+      },
+      "units": "fraction of unemployment-rate variance (regression coefficient)",
+      "expected_output_file": "output/table1.csv",
+      "provenance": {
+        "section": "Table 1",
+        "page": 33,
+        "quote": "Table 1: Decomposition: Job finding and employment exit rates. ... All series are quarterly averages of monthly data and detrended using an HP filter with smoothing parameter 10^5."
+      }
+    },
+    {
+      "id": "C5",
+      "description": "The job finding probability F_t averages 44 percent over the post-war period.",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "Compute the mean of the reproduced monthly (or quarterly-averaged) job finding probability F_t from 1948 to 2010, constructed via equation (4). It should be ~0.44. Note find.dat stores the job finding rate f_t; convert with F_t = 1 - exp(-f_t) if needed before averaging.",
+      "paper_value": 0.44,
+      "units": "probability (mean over 1948-2010)",
+      "expected_output_file": "find.dat",
+      "provenance": {
+        "section": "2.2 Measurement",
+        "page": 8,
+        "quote": "the job finding probability is high, averaging 44 percent over the post-war period."
+      }
+    },
+    {
+      "id": "C6",
+      "description": "The job finding probability falls by about forty log points from peak to trough during recent decades.",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "From the reproduced F_t series, examine peak-to-trough swings in recent decades (e.g. cyclical episodes since ~1985). The log difference between a business-cycle peak and the following trough of F_t should be on the order of 0.40 (forty log points).",
+      "paper_value": 40,
+      "units": "log points (peak-to-trough amplitude)",
+      "provenance": {
+        "section": "2.2 Measurement",
+        "page": 8,
+        "quote": "it is variable, falling by about forty log points from peak to trough during recent decades."
+      }
+    },
+    {
+      "id": "C7",
+      "description": "The employment exit probability X_t averaged 3.4 percentage points over the same (post-war) period.",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "Compute the mean of the reproduced employment exit probability X_t (constructed via equation (5)) over 1948-2010; it should be ~0.034 (3.4 percentage points). sep.dat stores the exit rate x_t; convert with X_t = 1 - exp(-x_t) if needed.",
+      "paper_value": 0.034,
+      "units": "probability (mean, monthly)",
+      "expected_output_file": "sep.dat",
+      "provenance": {
+        "section": "2.2 Measurement",
+        "page": 8,
+        "quote": "the employment exit probability averaged 3.4 percentage points during the same period and was somewhat less volatile"
+      }
+    },
+    {
+      "id": "C8",
+      "description": "The standard deviation of HP-detrended X_t is 0.07, while the corresponding number for X-tilde_t (constructed without accounting for time aggregation) is 0.11.",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "Detrend the reproduced X_t (equation 5) and X-tilde_t (equation 6 with F-tilde = F) series with an HP filter (smoothing parameter 1e5) and compute the standard deviation of the cyclical component of each. X_t should be ~0.07 and X-tilde_t ~0.11, demonstrating that ignoring time aggregation inflates the measured volatility of the exit probability.",
+      "paper_value": {
+        "X_t": 0.07,
+        "X_tilde_t": 0.11
+      },
+      "units": "standard deviation of HP-detrended series (parameter 1e5)",
+      "provenance": {
+        "section": "2.2 Measurement, footnote 8",
+        "page": 8,
+        "quote": "Detrend both series using an HP filter with parameter 10^5. The standard deviation of detrended X_t is 0.07 while the corresponding number for X-tilde_t is 0.11."
+      }
+    },
+    {
+      "id": "C9",
+      "description": "In monthly data, the correlation between the end-of-month unemployment rate u_{t+1}/l_{t+1} and the steady-state approximation x_t/(x_t+f_t) is 0.98.",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "Using the reproduced monthly f_t and x_t series and the BLS unemployment rate, compute the correlation between u_{t+1}/l_{t+1} and x_t/(x_t+f_t). It should be ~0.98, validating the steady-state approximation used to build the decomposition.",
+      "paper_value": 0.98,
+      "units": "correlation coefficient",
+      "provenance": {
+        "section": "2.2 Measurement",
+        "page": 8,
+        "quote": "in monthly data, the correlation between u_{t+1}/l_{t+1} and x_t/(x_t+f_t) is 0.98."
+      }
+    },
+    {
+      "id": "C10",
+      "description": "Figure 1: time series of the job finding probability F_t (top panel) and employment exit probability X_t plus the time-aggregation-ignoring X-tilde_t (bottom panel), 1948Q1-2010Q4.",
+      "type": "figure",
+      "tier": "supporting",
+      "verification": "Inspect the reproduced Figure 1. Top panel: F_t ranging roughly 0.2-0.65, high early-1950s, cyclical, falling sharply to ~0.2 around 2009. Bottom panel: solid X_t line (~0.02-0.05) lying above the dashed X-tilde_t line, both peaking early-1980s and declining thereafter, illustrating the level and cyclicality effects of time aggregation.",
+      "expected_output_file": "output/figure1.pdf",
+      "provenance": {
+        "section": "Figure 1",
+        "page": 35,
+        "quote": "Figure 1: Job Finding and Employment Exit Probabilities, 1948Q1-2010Q4 ... The job finding probability F_t (top figure) is constructed ... according to equation (4)."
+      }
+    },
+    {
+      "id": "C11",
+      "description": "Figure 2: a decline in the job finding rate contributed to every increase in the unemployment rate over the post-war period, while the employment exit rate tracked unemployment only through 1985 and varied little cyclically afterward (aside from a 2008 spike).",
+      "type": "figure",
+      "tier": "supporting",
+      "verification": "Inspect reproduced Figure 2 (two panels). Top panel: hypothetical unemployment rate from job-finding fluctuations, x-bar/(x-bar+f_t), should closely track the actual unemployment rate at every cyclical increase. Bottom panel: hypothetical rate from exit fluctuations, x_t/(x_t+f-bar), should track unemployment from 1948-1985 but flatten (with a 2008 spike) afterward.",
+      "expected_output_file": "output/figure2.pdf",
+      "provenance": {
+        "section": "2.2 Measurement / Figure 2",
+        "page": 8,
+        "quote": "a decline in the job finding rate f_t contributed to every increase in the unemployment rate during the post-war period. ... Notwithstanding a spike in 2008, the exit rate more recently has varied little over the business cycle."
+      }
+    },
+    {
+      "id": "C12",
+      "description": "Figure 3: for 25-54 year old men there is almost no trend in the employment exit probability since 1976, and fluctuations in the job finding rate are more than twice as important as fluctuations in the employment exit rate.",
+      "type": "figure",
+      "tier": "supporting",
+      "verification": "Inspect reproduced Figure 3 (prime-age men 25-54 vs all workers, 1976-2010). Top panel job finding probability: men's line below all-workers line but similarly cyclical. Bottom panel employment exit probability: men's line (~0.015-0.03) roughly flat/trendless over the sample. Consistent with Table 1 column 5 (job finding contribution 0.69 > 2x exit contribution 0.32).",
+      "expected_output_file": "output/figure3.pdf",
+      "provenance": {
+        "section": "2.2 / Figure 3",
+        "page": 9,
+        "quote": "Figure 3 indicates almost no trend in the employment exit probability for 25 to 54 year old men since 1976."
+      }
+    },
+    {
+      "id": "C13",
+      "description": "The job finding probability F_t and the gross-flow-based UE transition probability are equally volatile with correlation 0.96 in quarterly-averaged data, and F_t is consistently about 31 log points higher than the UE transition probability.",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "Using the reproduced F_t (equation 4) and the UE transition probability Lambda^UE (from matched-CPS gross flows adjusted for time aggregation), compute their quarterly-averaged correlation (~0.96) and the average log level difference (F_t about 0.31 log points above Lambda^UE).",
+      "paper_value": {
+        "correlation": 0.96,
+        "level_difference_log_points": 31
+      },
+      "units": "correlation coefficient; log points (level difference)",
+      "provenance": {
+        "section": "3.2 Measurement",
+        "page": 12,
+        "quote": "They are equally volatile and their correlation is 0.96 in quarterly-averaged data. ... the job finding probability is consistently about 31 log points higher than the UE transition probability."
+      }
+    },
+    {
+      "id": "C14",
+      "description": "The employment exit probability X_t and the gross-flow-based EU transition probability have correlation 0.83 in quarterly-averaged data, with X_t averaging 56 log points higher than the EU transition probability.",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "Using the reproduced X_t (equation 5) and the EU transition probability Lambda^EU from matched-CPS gross flows, compute the quarterly-averaged correlation (~0.83) and the average log level difference (X_t about 0.56 log points above Lambda^EU).",
+      "paper_value": {
+        "correlation": 0.83,
+        "level_difference_log_points": 56
+      },
+      "units": "correlation coefficient; log points (level difference)",
+      "provenance": {
+        "section": "3.2 Measurement",
+        "page": 12,
+        "quote": "The correlation between the two series is 0.83 in quarterly-averaged data, with X_t averaging 56 log points higher than Lambda^EU."
+      }
+    },
+    {
+      "id": "C15",
+      "description": "Figure 4: the two-state job finding/exit probabilities and the three-state UE/EU transition probabilities move together closely despite being built from different data.",
+      "type": "figure",
+      "tier": "supporting",
+      "verification": "Inspect reproduced Figure 4 (two panels, dual axes). Top: F_t (left axis) and UE transition probability (right axis) should overlap in cyclical shape. Bottom: X_t (left axis) and EU transition probability (right axis) should co-move, with a notable divergence in the last two years of the sample where X_t falls back to pre-recession level while EU stays elevated.",
+      "expected_output_file": "output/figure4.pdf",
+      "provenance": {
+        "section": "Figure 4",
+        "page": 38,
+        "quote": "Figure 4: Alternative Measures of the Job Finding and Employment Exit Probabilities, 1967Q2-2010Q4 ..."
+      }
+    },
+    {
+      "id": "C16",
+      "description": "In the three-state (E/U/I) system, the steady-state unemployment rate measure has correlation 0.99 with next month's unemployment rate in quarterly-averaged data.",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "From the reproduced six instantaneous transition rates (lambda^AB), compute the three-state steady-state unemployment rate formula and correlate it (quarterly-averaged) with next month's actual unemployment rate; it should be ~0.99.",
+      "paper_value": 0.99,
+      "units": "correlation coefficient",
+      "provenance": {
+        "section": "3.2 Measurement",
+        "page": 13,
+        "quote": "In quarterly-averaged data, the correlation between this steady state measure and next month's unemployment rate is 0.99."
+      }
+    },
+    {
+      "id": "C17",
+      "description": "Table 2 decomposition of the contribution of each of the six instantaneous transition rates to fluctuations in the unemployment rate and the employment-population ratio, for 1967-2010 and 1987-2010.",
+      "type": "table",
+      "tier": "supporting",
+      "verification": "Compare the reproduced Table 2 cell-by-cell against these values. The lambda^UE row should dominate (~0.49-0.51 for unemployment, ~1.05-1.16 for emp-pop). Values derive from regressions of each detrended hypothetical series on the detrended actual variable, using the six transition-rate series from the .dat files (eu, ei, ue, ui, ie, iu).",
+      "paper_value": {
+        "columns": [
+          "unemployment rate 1967-2010",
+          "unemployment rate 1987-2010",
+          "employment-population ratio 1967-2010",
+          "employment-population ratio 1987-2010"
+        ],
+        "rows": [
+          {
+            "label": "lambda^EU",
+            "values": [
+              0.22,
+              0.17,
+              0.37,
+              0.3
+            ]
+          },
+          {
+            "label": "lambda^EI",
+            "values": [
+              -0.05,
+              -0.05,
+              -0.36,
+              -0.4
+            ]
+          },
+          {
+            "label": "lambda^UE",
+            "values": [
+              0.49,
+              0.51,
+              1.05,
+              1.16
+            ]
+          },
+          {
+            "label": "lambda^UI",
+            "values": [
+              0.17,
+              0.16,
+              -0.48,
+              -0.5
+            ]
+          },
+          {
+            "label": "lambda^IE",
+            "values": [
+              0.08,
+              0.09,
+              0.69,
+              0.73
+            ]
+          },
+          {
+            "label": "lambda^IU",
+            "values": [
+              0.12,
+              0.13,
+              -0.36,
+              -0.42
+            ]
+          }
+        ]
+      },
+      "units": "regression coefficient (contribution to detrended variable)",
+      "expected_output_file": "output/table2.csv",
+      "provenance": {
+        "section": "Table 2",
+        "page": 34,
+        "quote": "Table 2: Decomposition: entry and exit from the labor force. ... The remaining rows show decompositions from fluctuations in the other five transition rates."
+      }
+    },
+    {
+      "id": "C18",
+      "description": "Fluctuations in the UE transition rate account for about half of unemployment-rate movements, the EU transition rate for less than a quarter, and the UI transition rate is the third most important factor; over the last two decades the UE rate is about three times as volatile as the EU rate.",
+      "type": "qualitative",
+      "tier": "supporting",
+      "verification": "From the reproduced Table 2 columns 1-2 (unemployment rate): confirm lambda^UE ~0.49-0.51 (about half), lambda^EU ~0.17-0.22 (less than a quarter), lambda^UI third largest (~0.16-0.17). Confirm the text/Table statement that UE is roughly three times as volatile as EU in the 1987-2010 period.",
+      "provenance": {
+        "section": "3.2",
+        "page": 14,
+        "quote": "Fluctuations in the UE transition rate ... account for about half of the movement in the unemployment rate, while the EU transition rate accounts for less than a quarter. The third most important factor is a decrease in the UI transition rate"
+      }
+    },
+    {
+      "id": "C19",
+      "description": "For the employment-population ratio at business cycle frequencies, a 1 percentage point cyclical increase is associated with a 1.05 pp increase in the UE contribution and a 0.69 coefficient for the IE transition rate, while EU (0.37) is mostly offset by EI (-0.36).",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "From the reproduced Table 2 column 3 (employment-population ratio, 1967-2010): lambda^UE ~1.05, lambda^IE ~0.69, lambda^EU ~0.37, lambda^EI ~-0.36. Confirm the near-cancellation of the two exit rates (EU + EI nets to a small effect on emp-pop).",
+      "paper_value": {
+        "UE": 1.05,
+        "IE": 0.69,
+        "EU": 0.37,
+        "EI": -0.36
+      },
+      "units": "regression coefficient",
+      "expected_output_file": "output/table2.csv",
+      "provenance": {
+        "section": "3.2",
+        "page": 14,
+        "quote": "a 1 percentage point cyclical increase in the employment-population ratio is associated with a 1.05 percentage point increase in ... The second most important determinant is the IE transition rate (regression coefficient 0.69)"
+      }
+    },
+    {
+      "id": "C20",
+      "description": "Across three alternative measures of the job finding probability, the 1948-2010 mean of F_t is 44 percent, lying between the mean of M_t (54 percent, medium-term-unemployment based) and D_t (33 percent, mean-duration based).",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "Compute the 1948-2010 means of the three reproduced job-finding measures: F_t (equation 4) ~0.44, D_t (equation 9, mean-duration based) ~0.33, M_t (equation 10, medium-term-unemployment based) ~0.54. Confirm F_t lies between D_t and M_t.",
+      "paper_value": {
+        "F_t": 0.44,
+        "M_t": 0.54,
+        "D_t": 0.33
+      },
+      "units": "probability (mean over 1948-2010)",
+      "provenance": {
+        "section": "4.1",
+        "page": 17,
+        "quote": "The mean value from 1948 to 2010 of F_t is 44 percent, in between the corresponding means for M_t (54 percent) and D_t (33 percent)."
+      }
+    },
+    {
+      "id": "C21",
+      "description": "Among reasons for unemployment: job losers not on temporary layoff found a job with 30.7 percent average probability (1976-2010) vs 46.9 percent for other unemployed; the correlation between the job-loser share and their job finding rate is -0.79; the compositional measure F^comp rose from 40.1% (1992) to 42.2% (2000) then back to 40.1% (2003), while the real measure F^real rose from 36.1% (1992) to 49.7% (2000) and fell to 36.8% (2003).",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "From the reproduced reason-for-unemployment heterogeneity analysis (Figure 8 and the F^comp/F^real construction): check the average job finding probability of job losers not on temporary layoff (~0.307) vs other unemployed (~0.469), the -0.79 correlation between their unemployment share and their job finding rate, and the F^comp / F^real values at 1992/2000/2003. The key point is that the 'real' component F^real moves far more than the compositional component F^comp.",
+      "paper_value": {
+        "job_loser_finding_prob": 0.307,
+        "other_finding_prob": 0.469,
+        "share_correlation": -0.79,
+        "F_comp": {
+          "1992": 0.401,
+          "2000": 0.422,
+          "2003": 0.401
+        },
+        "F_real": {
+          "1992": 0.361,
+          "2000": 0.497,
+          "2003": 0.368
+        }
+      },
+      "units": "probability; correlation coefficient",
+      "provenance": {
+        "section": "4.2 / Figure 8",
+        "page": 19,
+        "quote": "a job loser not on layoff found a job with 30.7 percent probability, much lower than the probability for all other unemployed workers, which averaged 46.9 percent. ... correlation ... is -0.79. ... F^comp averaged 40.1 percent in 1992, rose to 42.2 percent in 2000, and then fell back to 40.1 percent in 2003. ... F^real rose from 36.1 percent in 1992 to 49.7 percent in 2000 and fell to 36.8 percent in 2003."
+      }
+    },
+    {
+      "id": "C22",
+      "description": "Figure 9: across all seven observable dimensions (age, sex, race, marital status, census region, reason for unemployment, education), virtually all of the change in the job finding probability is 'real' (F^real) rather than compositional (F^comp).",
+      "type": "figure",
+      "tier": "supporting",
+      "verification": "Inspect reproduced Figure 9 (seven panels). In each panel the solid F^real line should exhibit the large cyclical fluctuations (matching the aggregate job finding probability), while the dashed F^comp line should be nearly flat around ~0.4 (or ~0.35 for education), showing composition explains little of the cyclicality.",
+      "expected_output_file": "output/figure9.pdf",
+      "provenance": {
+        "section": "4.2 / Figure 9",
+        "page": 19,
+        "quote": "Each figure shows that virtually all of the change in the job finding probability is 'real.' I conclude that observable changes in the composition of the unemployed population explain little of the overall fluctuations in the job finding probability."
+      }
+    },
+    {
+      "id": "C23",
+      "description": "The monthly employment exit probability averages 3.4 percentage points (two-state); the sum of monthly EU and EI flows averages 5.0 percentage points (three-state); adding employer-to-employer transitions adds another 2.6 percentage points; yet the quarterly job destruction rate is just 5.5 percent.",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "Cross-check the reproduced averages: two-state monthly exit probability X_t ~0.034; three-state EU+EI monthly flow ~0.050; the +2.6pp employer-to-employer figure (from Fallick-Fleischman, may be a cited input); and the 5.5% quarterly job destruction rate (Davis-Haltiwanger-Schuh manufacturing data, Figure 10). The point is that worker flows greatly exceed matched job flows.",
+      "paper_value": {
+        "two_state_exit": 0.034,
+        "three_state_EU_plus_EI": 0.05,
+        "employer_to_employer_add": 0.026,
+        "quarterly_job_destruction": 0.055
+      },
+      "units": "probability / rate",
+      "provenance": {
+        "section": "5.1",
+        "page": 21,
+        "quote": "the monthly employment exit probability averages 3.4 percentage points. In the three-state model ... the sum of monthly employment-unemployment and employment-inactive flows averages 5.0 percentage points. Accounting for employer-to-employer transitions adds another 2.6 percentage points ... The quarterly job destruction rate ... is instead just 5.5 percent."
+      },
+      "notes": "The employer-to-employer and job-destruction numbers partly come from external data sources; verify what the code produces vs cites."
+    },
+    {
+      "id": "C24",
+      "description": "Short-term unemployment accounted for 41.7 percent of total unemployment (1976-1993) in both the full CPS and the incoming rotation groups; from 1994-2010 it fell to 37.3 percent in the full sample but rose to 43.2 percent in the incoming rotation groups.",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "From the reproduced CPS microdata processing (short-term unemployment measurement, Appendix A): compute the share of short-term unemployed among all unemployed for the full sample and the incoming rotation groups over 1976-1993 (both ~0.417) and 1994-2010 (full ~0.373, incoming ~0.432). This demonstrates the 1994 CPS-redesign discontinuity the paper corrects for.",
+      "paper_value": {
+        "1976_1993_full": 0.417,
+        "1976_1993_incoming": 0.417,
+        "1994_2010_full": 0.373,
+        "1994_2010_incoming": 0.432
+      },
+      "units": "fraction of total unemployment",
+      "provenance": {
+        "section": "Appendix A",
+        "page": 27,
+        "quote": "From 1976 to 1993, short term unemployment accounted for 41.7 percent of total unemployment both in the full CPS and in the incoming rotation groups. From 1994 to 2010, however, short term unemployment accounted for just 37.3 percent of unemployment in the full sample but 43.2 percent in the incoming rotation groups"
+      }
+    },
+    {
+      "id": "C25",
+      "description": "Over the 1976-1993 overlap period, the paper's matched-CPS gross flow series and Bleakley's independent gross flow estimates are virtually identical: the standard deviation of the log of the ratio of the two sets of series is less than 1 percent.",
+      "type": "scalar",
+      "tier": "supporting",
+      "verification": "If both gross-flow series are reproduced, compute the standard deviation of log(series_author / series_Bleakley) over January 1976-May 1993; it should be < 0.01. This is a consistency/validation check on the matched-CPS gross-flow construction.",
+      "paper_value": 0.01,
+      "units": "standard deviation of log ratio (upper bound)",
+      "provenance": {
+        "section": "3.2 Measurement, footnote 19",
+        "page": 12,
+        "quote": "During the overlapping period, the two series are virtually identical; the standard deviation of the log of the ratio of the two sets of series is less than 1 percent."
+      },
+      "notes": "Requires Bleakley's independent series, which may not be in the replication package; treat as optional if unavailable."
+    },
+    {
+      "id": "C26",
+      "description": "Figure 7: three alternative measures of the job finding probability (F_t, D_t, M_t) have similar cyclical behavior with levels ordered M_t > F_t > D_t.",
+      "type": "figure",
+      "tier": "supporting",
+      "verification": "Inspect reproduced Figure 7. Three lines F_t (solid), D_t (dotted), M_t (dashed) should co-move cyclically over 1948-2010, with M_t highest, D_t lowest, and F_t in between, consistent with the means in claim C20.",
+      "expected_output_file": "output/figure7.pdf",
+      "provenance": {
+        "section": "4.1 / Figure 7",
+        "page": 41,
+        "quote": "Even though each series is constructed from different moments of the unemployment duration distribution, their cyclical behavior is similar and their levels line up as predicted."
+      }
+    },
+    {
+      "id": "C27",
+      "description": "The employment exit probability has secularly declined since the early 1980s, despite three spikes in the unemployment rate (associated with the 1990-91, 2001, and 2008-09 recessions).",
+      "type": "qualitative",
+      "tier": "supporting",
+      "verification": "From the reproduced X_t series (sep.dat / Figure 1 bottom panel): confirm a downward secular trend in the employment exit probability from the early 1980s to the mid-2000s, with only modest bumps around the recessions rather than large sustained increases.",
+      "provenance": {
+        "section": "Introduction / 2.2",
+        "page": 1,
+        "quote": "the employment exit probability has secularly declined despite three spikes in the unemployment rate."
+      }
+    }
+  ]
+}

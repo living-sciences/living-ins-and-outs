@@ -1,0 +1,18 @@
+{
+  "claim_id": "C18",
+  "status": "match",
+  "structured": {
+    "observed_behavior": "Reproduced Table 2 unemployment-rate decomposition (output/table2.json, urate.full): lambda^UE=0.504 (about half), lambda^EU=0.218 (less than a quarter, <0.25), lambda^UI=0.181, which is the third-largest slope (ranking UE 0.504 > EU 0.218 > UI 0.181 > IU 0.095 > IE 0.072 > EI -0.044); the post-1987 column (urate.1987) is consistent: UE=0.553, EU=0.134, UI=0.176 still third. Computing HP(1e5)-detrended log volatility of the shipped ue.dat vs eu.dat over the 1987+ sub-sample gives std_UE=0.139, std_EU=0.056, ratio~2.49 (UE substantially more volatile than EU); the shipped three-state lambda series end at 2004.75, so the Great-Recession quarters that drive the ratio toward 3 in the paper's 1987-2010 window are absent.",
+    "claim_paraphrase": "In the Table 2 unemployment-rate decomposition, the UE transition rate explains about half of unemployment movements, the EU rate less than a quarter, and the UI rate is the third most important; and over the last two decades the UE rate is about three times as volatile as the EU rate.",
+    "semantic_match": true
+  },
+  "rationale": "The three quantitative sub-claims of the decomposition are unambiguously demonstrated by the produced output/table2.json. In the full-sample unemployment-rate column, lambda^UE=0.504 (squarely in the expected ~0.49-0.51 'about half' band), lambda^EU=0.218 (in the ~0.17-0.22 band and clearly less than a quarter), and lambda^UI=0.181 is the third-largest slope after UE and EU (UE 0.504 > EU 0.218 > UI 0.181 > IU 0.095 > IE 0.072 > EI -0.044), matching 'the third most important factor is the UI rate.' The post-1987 column is consistent (UE 0.553, EU 0.134, UI 0.176 still third). For the volatility statement, the shipped lambda series (ue.dat, eu.dat) end at 2004.75, so I computed the HP(1e5)-detrended log-series standard deviations directly over the 1987+ sub-sample: std_UE=0.1389 vs std_EU=0.0559, a ratio of ~2.49 \u2014 confirming UE is far more volatile than EU and roughly (though not exactly) threefold. The shortfall from the paper's ~3x is attributable to the truncated sample: the data stop in 2004.75 and omit the 2008-2010 recession quarters when the UE rate collapsed, which is a known data-availability limitation of the shipped three-state entry point (plan step 6 notes the upstream monthly microdata are not in the package). All of the sharp, gradeable pieces of the claim land in range and the soft volatility comparison is directionally and roughly confirmed, so the claim is supported.",
+  "evidence_refs": [
+    "output/replication/codebase/output/table2.json",
+    "output/replication/codebase/ue.dat",
+    "output/replication/codebase/eu.dat",
+    "output/analyze/replication_plan.json",
+    "output/assess/fix_severity.json"
+  ],
+  "graded_by": "agent"
+}

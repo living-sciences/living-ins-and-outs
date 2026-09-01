@@ -1,0 +1,19 @@
+{
+  "claim_id": "C9",
+  "status": "match",
+  "structured": {
+    "replicated_value": 0.987,
+    "paper_value": 0.98,
+    "uncertainty": null,
+    "value_found": true
+  },
+  "rationale": "The plan's step 2 (targeting this claim) ran the two-state construction on the shipped 1951:M1-2005:M1 aggregate data and produced corr_urate_ss=0.9872 (output/two_state/summary.json, line 7). The code confirms this is exactly the correlation the claim describes: run_two_state.py line 100 builds UrateM = (unemp/(unemp+emp))[1:], i.e. the end-of-month rate led one period u_{t+1}/l_{t+1}; lines 157-158 build ss_month = sepM/(sepM+findM) = x_t/(x_t+f_t) and take np.corrcoef(UrateM, ss_month), a monthly correlation as the claim specifies. The value 0.9872 differs from the paper's 0.98 by 0.7% relative error, well within the 5% match band. The independent FRED 1948-2010 reconstruction (output/two_state_1948_2010/summary.json) gives 0.9827, also a match. The one fix logged in fix_severity.json (a --splice_tail flag) affects only the sample-extension for the 1948-2010 run and is default-off, so it does not touch the step-2 series underlying the primary value; both series corroborate the claim regardless. This validates the steady-state approximation.",
+  "evidence_refs": [
+    "output/two_state/summary.json",
+    "output/two_state_1948_2010/summary.json",
+    "run_two_state.py",
+    "replication_log.json",
+    "assess/fix_severity.json"
+  ],
+  "graded_by": "agent"
+}

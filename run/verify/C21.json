@@ -1,0 +1,9 @@
+{
+  "claim_id": "C21",
+  "status": "not_attempted",
+  "structured": {},
+  "rationale": "No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Job-loser-share and reason-for-unemployment job-finding rates and the F^comp/F^real decomposition require CPS microdata by reason for unemployment; not shipped and no script provided (checked all repo files).",
+  "evidence_refs": [],
+  "not_attempted_reason": "authors_missing",
+  "graded_by": "deterministic"
+}

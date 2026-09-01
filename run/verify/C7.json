@@ -1,0 +1,17 @@
+{
+  "claim_id": "C7",
+  "status": "match",
+  "structured": {
+    "replicated_value": 0.0335,
+    "paper_value": 0.034,
+    "uncertainty": null,
+    "value_found": true
+  },
+  "rationale": "The claim asks for the post-war (1948-2010) mean of the employment exit probability X_t constructed via eq. (5), expected ~0.034. The run produced output/two_state_1948_2010/sep.dat covering exactly 1948:M1-2010:M12 (n=251 quarters) storing the exit rate x_t; its raw mean is 0.03417, and converting to the probability X_t = 1-exp(-x_t) gives mean 0.03358. The corresponding output/two_state_1948_2010/summary.json reports mean_X = 0.033547 for sample '1948:M1-2010:M12'. This is within ~1.3% relative of the paper value 0.034 (3.4 percentage points), well inside the 5% match band with no uncertainty conveyed.",
+  "evidence_refs": [
+    "output/replication/codebase/output/two_state_1948_2010/summary.json",
+    "output/replication/codebase/output/two_state_1948_2010/sep.dat",
+    "output/analyze/replication_plan.json"
+  ],
+  "graded_by": "agent"
+}

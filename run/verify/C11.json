@@ -1,0 +1,37 @@
+{
+  "claim_id": "C11",
+  "status": "no_match",
+  "structured": {
+    "file_exists": false,
+    "evidence_found": true,
+    "file_path_checked": [
+      "output/figure2.pdf",
+      "output/two_state/figure2.pdf",
+      "output/two_state_1948_2010/figure2.pdf"
+    ],
+    "structural_features_present": [
+      "two-panel layout",
+      "one panel for the job-finding probability F, one for the exit probability X",
+      "negative F-vs-unemployment relationship (consistent with job finding falling as unemployment rises)",
+      "positive X-vs-unemployment relationship (consistent with exit rate rising with unemployment)"
+    ],
+    "structural_features_missing": [
+      "time axis (post-war years ~1948/1951-2005/2010) \u2014 the produced figure is a scatter with the unemployment rate on the x-axis, not a time series",
+      "top-panel hypothetical unemployment rate x-bar/(x-bar+f_t) constructed from job-finding fluctuations",
+      "bottom-panel hypothetical rate x_t/(x_t+f-bar) constructed from exit fluctuations",
+      "overlay of each hypothetical series against the actual unemployment rate",
+      "the claim's assessable temporal features: job-finding hypothetical tracking the actual rate at every cyclical increase; exit hypothetical tracking through ~1985 then flattening cyclically with a 2008 spike"
+    ],
+    "structural_match": false
+  },
+  "rationale": "The claim describes the paper's Figure 2 as a two-panel time series in which a hypothetical unemployment rate driven only by job-finding fluctuations (x-bar/(x-bar+f_t), top panel) tracks the actual unemployment rate at every cyclical increase, and a hypothetical rate driven only by exit fluctuations (x_t/(x_t+f-bar), bottom panel) tracks unemployment through ~1985 then flattens cyclically aside from a 2008 spike. The run did produce figure2.pdf files (output/two_state/figure2.pdf and output/two_state_1948_2010/figure2.pdf; the exact expected path output/figure2.pdf does not exist), but the plotting code (run_two_state.py:196, 'Figure 2: F and X against the unemployment rate') emits a two-panel SCATTER of the raw job-finding probability F vs. the unemployment rate (left) and the exit probability X vs. the unemployment rate (right). Confirmed by reading both PDFs: x-axis is 'unemployment rate' (0.03-0.11), y-axes are F (~0.32-0.65) and X (~0.025-0.048), no time dimension. This is a different figure from the paper's Figure 2: it has no time axis, does not construct or plot the hypothetical unemployment-rate series (x-bar/(x-bar+f_t) or x_t/(x_t+f-bar) \u2014 those hypotheticals are only built inside table1_decomp.py for the regression decomposition, not plotted here), and therefore cannot exhibit or be checked against the claim's core temporal features (tracking at every increase; 1985 flattening; 2008 spike). The scatter does not contradict the underlying economics (F falls, X rises with unemployment), but essentially none of the described structural features of Figure 2 are present, so the claim cannot be verified from the produced figure. fix_severity.json records only one major data-handling fix (tail-splice), unrelated to the figure's structure.",
+  "evidence_refs": [
+    "output/replication/codebase/output/two_state/figure2.pdf",
+    "output/replication/codebase/output/two_state_1948_2010/figure2.pdf",
+    "output/replication/codebase/run_two_state.py",
+    "output/replication/codebase/table1_decomp.py",
+    "output/analyze/replication_plan.json",
+    "output/assess/fix_severity.json"
+  ],
+  "graded_by": "agent"
+}

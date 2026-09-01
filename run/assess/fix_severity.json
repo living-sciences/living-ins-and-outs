@@ -1,0 +1,15 @@
+{
+  "fixes": [
+    {
+      "fix_description": "Added an opt-in --splice_tail flag so the short-term series continues with the published level past the 2005M1 end of the microdata-share window, allowing the sample to extend to 2010M12.",
+      "severity": "major",
+      "rationale": "The microdata shares used for the adjustment only cover through 2005M1, so the sample-length logic (available = min(len)) silently truncated the entire run at the share-window end and could not reach the paper's 1948-2010 endpoint. Recovering the full sample required understanding how the share window interacts with the truncation logic and adding a deliberate data-extension step (concatenating prefix + adjusted + published tail). That is a localized but non-trivial data-handling change requiring comprehension of the pipeline, not a routine one-minute edit, but it does not alter the core algorithm or rely on unavailable data (the published level exists for the tail).",
+      "reproducibility_impact": "Indicates the provided notebook/code as shipped only reproduced results up to the microdata-share window (2005M1) and did not itself extend the series to the full 1948-2010 sample the paper reports. The share-based adjustment window and the full analysis window are mismatched, and the code that bridged them was missing. This is a genuine incompleteness in the published pipeline for the full-sample results, though the fix is conservative (default off preserves notebook behavior) and the extension method is a plausible, documented reconstruction rather than a fabrication."
+    }
+  ],
+  "summary": "Only one fix was required, and it is a single localized data-handling gap rather than a fundamental methodological failure. The core two-state estimation algorithm was intact and the fix defaults to off so step-2 behavior matches the notebook exactly. The issue is that the published code only ran cleanly up to the 2005M1 end of the microdata-share window, while the paper's headline sample runs through 2010M12; bridging that gap required understanding the truncation logic and adding a deliberate tail-splice using the published level. This raises it above trivial maintenance to major, and signals that the shipped pipeline was incomplete for reproducing the full-sample results even though the estimation methodology itself is sound and implementable.",
+  "total_fixes": 1,
+  "minor_count": 0,
+  "major_count": 1,
+  "critical_count": 0
+}

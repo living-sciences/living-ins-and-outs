@@ -1,0 +1,20 @@
+{
+  "compute_class": "light",
+  "breakdown_notes": "Paper: Robert Shimer, 'Reassessing the Ins and Outs of Unemployment' (current version Feb 2012). This is a macro-labor time-series econometrics paper. It uses 'readily accessible aggregate time series' (BLS/CPS) covering monthly U.S. data 1948-2010 and quarterly gross-flow series 1967-2010 -- i.e. only a few hundred to ~750 monthly observations. The methodology is: constructing job-finding probability F_t from eq. (4), solving eq. (5) for the exit rate x_t by 1-D root finding each month, HP-filtering in logs (smoothing 1e5), quarterly averaging, and OLS-slope decompositions (Tables 1-2). All of this is trivially CPU-bound and runs in seconds to a couple of minutes on a single core. The paper reports NO hardware, NO wall-clock training/inference times, NO GPU, and NO API costs anywhere -- there is nothing to quote because none is stated. The only large data artifact mentioned is 'about 42 gigabytes of raw CPS data files' matched via Stata to build the gross-flow (three-state) inputs, but (a) this is a one-time disk/IO-bound data-preparation step, not GPU/model compute, and (b) per the replication plan it is BLOCKED/not executed -- the shipped, already-time-aggregated instantaneous-rate outputs (ei/eu/ie/iu/ue/ui.dat) are used as the entry point, so the 42GB microdata pipeline is never run in the plan. The original code path is Mathematica 5.0 notebooks; the plan faithfully ports them to CPU-bound Python (numpy/scipy/pandas/statsmodels). Estimated total runtime for all 7 executed steps well under 5 minutes on a single CPU core, plus a small FRED CSV download in step 4. No cost estimate is warranted.",
+  "needs_gpu": false,
+  "paper_reported_compute": "None stated. Paper mentions only ~42 GB of raw CPS public-use microdata files matched via Stata for the gross-flows construction (a disk/IO data-prep step, not part of the executed plan). No hardware, wall-clock time, or cost is reported.",
+  "paper_reported_cost_usd": null,
+  "estimated_cost_usd": 0.0,
+  "estimated_cost_source": null,
+  "total_steps": 7,
+  "training_or_inference_steps": 0,
+  "estimated_experiment_runs": 7,
+  "estimated_llm_calls": 0,
+  "external_api_calls": "FRED CSV download only (fred.stlouisfed.org fredgraph endpoint) for 3 free public series in step 4; no paid API.",
+  "dataset_size": "Aggregate monthly time series 1948-2010 (~750 obs) plus quarterly gross-flow series 1967-2010; a few MB of txt/dat inputs. (Full CPS microdata ~42GB is referenced by the paper but NOT used in the executed replication plan -- that gross-flow construction step is blocked.)",
+  "parallelizable": false,
+  "notes_on_blocked_steps": "The one potentially non-light component -- reconstructing gross flows from ~42GB of raw CPS microdata via Stata -- is marked blocked in the replication plan (claims C12/C21/C22/C23/C24 blocked; microdata and Stata scripts not shipped). If a user chose to re-run that upstream microdata pipeline it would become 'medium' (disk/IO and Stata-bound, potentially minutes-to-hours, still CPU-only, no GPU), but that is out of scope for the executed plan.",
+  "external_llm": null,
+  "requires_data_download": false,
+  "key_dependencies": []
+}

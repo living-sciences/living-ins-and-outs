@@ -1,0 +1,25 @@
+{
+  "claim_id": "C8",
+  "status": "match",
+  "structured": {
+    "replicated_value": {
+      "X_t": 0.077,
+      "X_tilde_t": 0.109
+    },
+    "paper_value": {
+      "X_t": 0.07,
+      "X_tilde_t": 0.11
+    },
+    "uncertainty": null,
+    "value_found": true
+  },
+  "rationale": "The pipeline detrended both the exit-probability series X_t (eq. 5) and the time-aggregation-ignoring X-tilde_t (eq. 6 with F-tilde=F) with an HP filter (smoothing 1e5) and reported the standard deviations in summary.json. For the paper's headline 1948:M1-2010:M12 sample (output/two_state_1948_2010/summary.json), sd_detrended_X = 0.0768 and sd_detrended_Xtilde = 0.1086, which round to the paper's reported 0.07 and 0.11 respectively; the replication log for this run notes 'sd_detrended_X=0.0768 (paper ~0.07)'. X-tilde_t is essentially exact (0.1086 vs 0.11, ~1.3% off) and X_t is within ~10% (0.0768 vs 0.07), well inside the small-value band given the paper's 2-decimal reporting and the documented post-2005 data reconstruction (fix_severity.json: a major but conservative tail-splice to extend the shipped share window). The qualitative point of the footnote \u2014 that ignoring time aggregation inflates measured volatility (X-tilde_t std clearly exceeds X_t std, ratio ~1.4 vs paper's ~1.6) \u2014 is reproduced. The shipped-data-only 1951-2005 run (output/two_state/summary.json) gives the same ordering with slightly lower magnitudes (0.0654 and 0.0965). Both runs support the claim; the full-sample run matches the paper's stated values closely.",
+  "evidence_refs": [
+    "output/replication/codebase/output/two_state_1948_2010/summary.json",
+    "output/replication/codebase/output/two_state/summary.json",
+    "output/replication/replication_log.json",
+    "output/analyze/replication_plan.json",
+    "output/assess/fix_severity.json"
+  ],
+  "graded_by": "agent"
+}

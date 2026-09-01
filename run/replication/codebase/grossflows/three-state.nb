@@ -1,0 +1,499 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     17959,        431]*)
+(*NotebookOutlinePosition[     18608,        453]*)
+(*  CellTagsIndexPosition[     18564,        449]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[{
+    \(\(Off[General::spell1];\)\), "\[IndentingNewLine]", 
+    \(\(Off[General::spell];\)\), "\[IndentingNewLine]", 
+    \(\(SetDirectory["\<C:\cps\>"];\)\)}], "Input"],
+
+Cell[BoxData[
+    \(\(dateQ[x_] := 
+        Transpose[{Table[1967.25 + \(i - 1\)\/4. , {i, 1, Length[x]}], 
+            x}];\)\)], "Input"],
+
+Cell[BoxData[{
+    RowBox[{
+      RowBox[{"temp", "=", 
+        RowBox[{
+          RowBox[{"DSolve", "[", 
+            RowBox[{
+              RowBox[{"{", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{
+                      SuperscriptBox["xue", "\[Prime]",
+                        MultilineFunction->None], "[", "\[Tau]", "]"}], 
+                    "\[Equal]", \(\((1 - xue[\[Tau]] - 
+                            xui[\[Tau]])\)\ \[Lambda]ue + 
+                      xui[\[Tau]]\ \[Lambda]ie - 
+                      xue[\[Tau]]\ \((\[Lambda]eu + \[Lambda]ei)\)\)}], ",", 
+                  RowBox[{
+                    RowBox[{
+                      SuperscriptBox["xui", "\[Prime]",
+                        MultilineFunction->None], "[", "\[Tau]", "]"}], 
+                    "\[Equal]", \(\((1 - xue[\[Tau]] - 
+                            xui[\[Tau]])\)\ \[Lambda]ui + 
+                      xue[\[Tau]]\ \[Lambda]ei - 
+                      xui[\[Tau]]\ \((\[Lambda]iu + \[Lambda]ie)\)\)}]}], 
+                "}"}], ",", \({xue, xui}\), ",", "\[Tau]"}], "]"}], 
+          "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], 
+      ";"}], "\n", \(solu = \({Xue \[Equal] xue[1], 
+              Xui \[Equal] xui[1]} /. \[InvisibleSpace]temp\) /. \(Solve[
+              Evaluate[
+                Limit[{xue[\[Tau]], 
+                        xui[\[Tau]]} /. \[InvisibleSpace]temp, \[Tau] \[Rule] 
+                      0] \[Equal] {0, 0}], {C[1], 
+                C[2]}]\)\[LeftDoubleBracket]1\[RightDoubleBracket];\)}], \
+"Input"],
+
+Cell[BoxData[{
+    RowBox[{
+      RowBox[{"temp", "=", 
+        RowBox[{
+          RowBox[{"DSolve", "[", 
+            RowBox[{
+              RowBox[{"{", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{
+                      SuperscriptBox["xie", "\[Prime]",
+                        MultilineFunction->None], "[", "\[Tau]", "]"}], 
+                    "\[Equal]", \(\((1 - xiu[\[Tau]] - 
+                            xie[\[Tau]])\)\ \[Lambda]ie + 
+                      xiu[\[Tau]]\ \[Lambda]ue - 
+                      xie[\[Tau]]\ \((\[Lambda]eu + \[Lambda]ei)\)\)}], ",", 
+                  RowBox[{
+                    RowBox[{
+                      SuperscriptBox["xiu", "\[Prime]",
+                        MultilineFunction->None], "[", "\[Tau]", "]"}], 
+                    "\[Equal]", \(\((1 - xiu[\[Tau]] - 
+                            xie[\[Tau]])\)\ \[Lambda]iu + 
+                      xie[\[Tau]]\ \[Lambda]eu - 
+                      xiu[\[Tau]]\ \((\[Lambda]ui + \[Lambda]ue)\)\)}]}], 
+                "}"}], ",", \({xie, xiu}\), ",", "\[Tau]"}], "]"}], 
+          "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], 
+      ";"}], "\n", \(soli = \({Xie \[Equal] xie[1], 
+              Xiu \[Equal] 
+                xiu[1]} /. \[InvisibleSpace]temp\) \
+/. \[InvisibleSpace]\(Solve[
+              Evaluate[
+                Limit[{xie[\[Tau]], 
+                        xiu[\[Tau]]} /. \[InvisibleSpace]temp, \[Tau] \[Rule] 
+                      0] \[Equal] {0, 0}], {C[1], 
+                C[2]}]\)\[LeftDoubleBracket]1\[RightDoubleBracket];\)}], \
+"Input"],
+
+Cell[BoxData[{
+    \(\(temp = \(DSolve[{\(xei'\)[\[Tau]] \[Equal] \((1 - xei[\[Tau]] - 
+                        xeu[\[Tau]])\) \[Lambda]ei + 
+                  xeu[\[Tau]] \[Lambda]ui - 
+                  xei[\[Tau]] \((\[Lambda]iu + \[Lambda]ie)\), \
+\(xeu'\)[\[Tau]] \[Equal] \((1 - xei[\[Tau]] - xeu[\[Tau]])\) \[Lambda]eu + 
+                  xei[\[Tau]] \[Lambda]iu - 
+                  xeu[\[Tau]] \((\[Lambda]ui + \[Lambda]ue)\)}, {xei, 
+              xeu}, \[Tau]]\)[\([1]\)];\)\), "\n", 
+    \(\(sole = \({Xei \[Equal] xei[1], 
+              Xeu \[Equal] xeu[1]} /. \[InvisibleSpace]temp\) /. \(Solve[
+              Evaluate[
+                Limit[{xei[\[Tau]], 
+                        xeu[\[Tau]]} /. \[InvisibleSpace]temp, \[Tau] \[Rule] 
+                      0] \[Equal] {0, 0}], {C[1], 
+                C[2]}]\)\[LeftDoubleBracket]1\[RightDoubleBracket];\)\)}], \
+"Input"],
+
+Cell[BoxData[
+    \(\(sol = Simplify[Flatten[{solu, soli, sole}]];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(X = 
+      Transpose[{Import["\<ei.txt\>", "\<List\>"], 
+          Import["\<eu.txt\>", "\<List\>"], Import["\<ie.txt\>", "\<List\>"], 
+          Import["\<iu.txt\>", "\<List\>"], Import["\<ue.txt\>", "\<List\>"], 
+          Import["\<ui.txt\>", "\<List\>"]}]\)], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[{
+    \(\(t = 1;\)\), "\n", 
+    \(\[CapitalLambda] = {}; \), "\n", 
+    \(\(While[
+        t \[LessEqual] 
+          Length[X], \[IndentingNewLine]{Xei, Xeu, Xie, Xiu, Xue, Xui} = 
+          X[\([\)\(t\)\(]\)]; \[IndentingNewLine]If[
+          Xei \[NotEqual] 0, \n\[CapitalLambda] = 
+            Append[\[CapitalLambda], {\[Lambda]ei, \[Lambda]eu, \[Lambda]ie, \
+\[Lambda]iu, \[Lambda]ue, \[Lambda]ui} /. 
+                FindRoot[
+                  sol, {\[Lambda]ei, Xei}, {\[Lambda]eu, Xeu}, {\[Lambda]ie, 
+                    Xie}, {\[Lambda]iu, Xiu}, {\[Lambda]ue, 
+                    Xue}, {\[Lambda]ui, 
+                    Xui}]], \[IndentingNewLine]\[CapitalLambda] = 
+            Append[\[CapitalLambda], {0, 0, 0, 0, 0, 0}]]; 
+        t += 1];\)\)}], "Input"],
+
+Cell[BoxData[
+    \(\(\[CapitalLambda]1 = Drop[\[CapitalLambda], 1];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+The data starts in June 1967.  Add two months of dummies to the start of the \
+output matrix to get a full quarter.\
+\>", "Subsubsection"],
+
+Cell[BoxData[
+    \(\(\[CapitalLambda]1 = 
+        Prepend[Prepend[\[CapitalLambda], {0, 0, 0, 0, 0, 0}], {0, 0, 0, 0, 
+            0, 0}];\)\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Take the quarterly average.  If there is incomplete data for the quarter, \
+just average the available months.  If there is no data for the quarter, \
+throw it away.\
+\>", "Subsubsection"],
+
+Cell[BoxData[{
+    \(\(temp = 
+        Mean /@ DeleteCases[
+            Partition[\(Transpose[\[CapitalLambda]1]\)\[LeftDoubleBracket]1\
+\[RightDoubleBracket], 3], 0, 2];\)\), "\n", 
+    \(\(\[Lambda]eiQ = 
+        Flatten[ReplacePart[
+            temp, \(temp\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\
+\[LeftDoubleBracket]1\[RightDoubleBracket] - 1\[RightDoubleBracket] + temp\
+\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\[LeftDoubleBracket]1\
+\[RightDoubleBracket] + 1\[RightDoubleBracket]\)\/2, 
+            Position[temp, Mean[{}]]]];\)\[IndentingNewLine]\), "\n", 
+    \(\(temp = 
+        Mean /@ DeleteCases[
+            Partition[\(Transpose[\[CapitalLambda]1]\)\[LeftDoubleBracket]2\
+\[RightDoubleBracket], 3], 0, 2];\)\), "\n", 
+    \(\(\[Lambda]euQ = 
+        Flatten[ReplacePart[
+            temp, \(temp\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\
+\[LeftDoubleBracket]1\[RightDoubleBracket] - 1\[RightDoubleBracket] + temp\
+\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\[LeftDoubleBracket]1\
+\[RightDoubleBracket] + 1\[RightDoubleBracket]\)\/2, 
+            Position[temp, Mean[{}]]]];\)\[IndentingNewLine]\), "\n", 
+    \(\(temp = 
+        Mean /@ DeleteCases[
+            Partition[\(Transpose[\[CapitalLambda]1]\)\[LeftDoubleBracket]3\
+\[RightDoubleBracket], 3], 0, 2];\)\), "\n", 
+    \(\(\[Lambda]ieQ = 
+        Flatten[ReplacePart[
+            temp, \(temp\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\
+\[LeftDoubleBracket]1\[RightDoubleBracket] - 1\[RightDoubleBracket] + temp\
+\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\[LeftDoubleBracket]1\
+\[RightDoubleBracket] + 1\[RightDoubleBracket]\)\/2, 
+            Position[temp, Mean[{}]]]];\)\[IndentingNewLine]\), "\n", 
+    \(\(temp = 
+        Mean /@ DeleteCases[
+            Partition[\(Transpose[\[CapitalLambda]1]\)\[LeftDoubleBracket]4\
+\[RightDoubleBracket], 3], 0, 2];\)\), "\n", 
+    \(\(\[Lambda]iuQ = 
+        Flatten[ReplacePart[
+            temp, \(temp\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\
+\[LeftDoubleBracket]1\[RightDoubleBracket] - 1\[RightDoubleBracket] + temp\
+\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\[LeftDoubleBracket]1\
+\[RightDoubleBracket] + 1\[RightDoubleBracket]\)\/2, 
+            Position[temp, Mean[{}]]]];\)\[IndentingNewLine]\), "\n", 
+    \(\(temp = 
+        Mean /@ DeleteCases[
+            Partition[\(Transpose[\[CapitalLambda]1]\)\[LeftDoubleBracket]5\
+\[RightDoubleBracket], 3], 0, 2];\)\), "\n", 
+    \(\(\[Lambda]ueQ = 
+        Flatten[ReplacePart[
+            temp, \(temp\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\
+\[LeftDoubleBracket]1\[RightDoubleBracket] - 1\[RightDoubleBracket] + temp\
+\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\[LeftDoubleBracket]1\
+\[RightDoubleBracket] + 1\[RightDoubleBracket]\)\/2, 
+            Position[temp, Mean[{}]]]];\)\[IndentingNewLine]\), "\n", 
+    \(\(temp = 
+        Mean /@ DeleteCases[
+            Partition[\(Transpose[\[CapitalLambda]1]\)\[LeftDoubleBracket]6\
+\[RightDoubleBracket], 3], 0, 2];\)\), "\n", 
+    \(\(\[Lambda]uiQ = 
+        Flatten[ReplacePart[
+            temp, \(temp\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\
+\[LeftDoubleBracket]1\[RightDoubleBracket] - 1\[RightDoubleBracket] + temp\
+\[LeftDoubleBracket]\(Position[temp, Mean[{}]]\)\[LeftDoubleBracket]1\
+\[RightDoubleBracket] + 1\[RightDoubleBracket]\)\/2, 
+            Position[temp, Mean[{}]]]];\)\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Export the data.", "Subsubsection"],
+
+Cell[BoxData[{
+    \(\(Export["\<ei.dat\>", 
+        dateQ[\[Lambda]eiQ]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<eu.dat\>", 
+        dateQ[\[Lambda]euQ]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<ie.dat\>", 
+        dateQ[\[Lambda]ieQ]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<iu.dat\>", 
+        dateQ[\[Lambda]iuQ]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<ue.dat\>", 
+        dateQ[\[Lambda]ueQ]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<ui.dat\>", dateQ[\[Lambda]uiQ]];\)\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Compute hypotheticals, as in equation (8) in the paper, and export the \
+data.\
+\>", "Subsubsection"],
+
+Cell[BoxData[{
+    \(\(sse\  = \ \[Lambda]iuQ\ \[Lambda]ueQ + \[Lambda]uiQ\ \[Lambda]ieQ + \
+\[Lambda]ueQ\ \[Lambda]ieQ;\)\), "\n", 
+    \(\(ssu\  = \ \[Lambda]eiQ\ \[Lambda]iuQ + \[Lambda]ieQ\ \[Lambda]euQ + \
+\[Lambda]iuQ\ \[Lambda]euQ;\)\), "\n", 
+    \(\(ssi\  = \ \[Lambda]euQ\ \[Lambda]uiQ + \[Lambda]ueQ\ \[Lambda]eiQ + \
+\[Lambda]uiQ\ \[Lambda]eiQ;\)\), "\n", 
+    \(ssurate = ssu\/\(ssu + sse\); 
+    sserate = sse\/\(ssi + ssu + sse\);\)}], "Input"],
+
+Cell[BoxData[{
+    \(\(sse\  = \ \[Lambda]iuQ\ Mean[\[Lambda]ueQ] + 
+          Mean[\[Lambda]uiQ] Mean[\[Lambda]ieQ] + 
+          Mean[\[Lambda]ueQ]\ Mean[\[Lambda]ieQ];\)\), "\n", 
+    \(\(ssu\  = \ 
+        Mean[\[Lambda]eiQ]\ \[Lambda]iuQ + 
+          Mean[\[Lambda]ieQ] 
+            Mean[\[Lambda]euQ] + \[Lambda]iuQ\ Mean[\[Lambda]euQ];\)\), "\n", \
+
+    \(\(ssi\  = \ 
+        Mean[\[Lambda]euQ]\ Mean[\[Lambda]uiQ] + 
+          Mean[\[Lambda]ueQ]\ Mean[\[Lambda]eiQ] + 
+          Mean[\[Lambda]uiQ]\ Mean[\[Lambda]eiQ];\)\), "\n", 
+    \(ssurateiu = ssu\/\(ssu + sse\); 
+    sserateiu = 
+      sse\/\(ssi + ssu + sse\);\[IndentingNewLine]\), "\[IndentingNewLine]", 
+    \(\(sse\  = \ 
+        Mean[\[Lambda]iuQ]\ Mean[\[Lambda]ueQ] + 
+          Mean[\[Lambda]uiQ] \[Lambda]ieQ + 
+          Mean[\[Lambda]ueQ]\ \[Lambda]ieQ;\)\), "\n", 
+    \(\(ssu\  = \ 
+        Mean[\[Lambda]eiQ]\ Mean[\[Lambda]iuQ] + \[Lambda]ieQ\ \
+Mean[\[Lambda]euQ] + Mean[\[Lambda]iuQ]\ Mean[\[Lambda]euQ];\)\), "\n", 
+    \(\(ssi\  = \ 
+        Mean[\[Lambda]euQ]\ Mean[\[Lambda]uiQ] + 
+          Mean[\[Lambda]ueQ]\ Mean[\[Lambda]eiQ] + 
+          Mean[\[Lambda]uiQ]\ Mean[\[Lambda]eiQ];\)\), "\n", 
+    \(ssurateie = ssu\/\(ssu + sse\); 
+    sserateie = 
+      sse\/\(ssi + ssu + sse\);\[IndentingNewLine]\), "\[IndentingNewLine]", 
+    \(\(sse\  = \ 
+        Mean[\[Lambda]iuQ]\ Mean[\[Lambda]ueQ] + 
+          Mean[\[Lambda]uiQ] Mean[\[Lambda]ieQ] + 
+          Mean[\[Lambda]ueQ]\ Mean[\[Lambda]ieQ];\)\), "\n", 
+    \(\(ssu\  = \ \[Lambda]eiQ\ Mean[\[Lambda]iuQ] + 
+          Mean[\[Lambda]ieQ] Mean[\[Lambda]euQ] + 
+          Mean[\[Lambda]iuQ]\ Mean[\[Lambda]euQ];\)\), "\n", 
+    \(\(ssi\  = \ 
+        Mean[\[Lambda]euQ]\ Mean[\[Lambda]uiQ] + 
+          Mean[\[Lambda]ueQ]\ \[Lambda]eiQ + 
+          Mean[\[Lambda]uiQ]\ \[Lambda]eiQ;\)\), "\[IndentingNewLine]", 
+    \(ssurateei = ssu\/\(ssu + sse\); 
+    sserateei = 
+      sse\/\(ssi + ssu + sse\);\[IndentingNewLine]\), "\[IndentingNewLine]", 
+    \(\(sse\  = \ 
+        Mean[\[Lambda]iuQ]\ Mean[\[Lambda]ueQ] + 
+          Mean[\[Lambda]uiQ] Mean[\[Lambda]ieQ] + 
+          Mean[\[Lambda]ueQ]\ Mean[\[Lambda]ieQ];\)\), "\n", 
+    \(\(ssu\  = \ 
+        Mean[\[Lambda]eiQ]\ Mean[\[Lambda]iuQ] + 
+          Mean[\[Lambda]ieQ] \[Lambda]euQ + 
+          Mean[\[Lambda]iuQ]\ \[Lambda]euQ;\)\), "\n", 
+    \(\(ssi\  = \ \[Lambda]euQ\ Mean[\[Lambda]uiQ] + 
+          Mean[\[Lambda]ueQ]\ Mean[\[Lambda]eiQ] + 
+          Mean[\[Lambda]uiQ]\ Mean[\[Lambda]eiQ];\)\), "\[IndentingNewLine]", \
+
+    \(ssurateeu = ssu\/\(ssu + sse\); 
+    sserateeu = 
+      sse\/\(ssi + ssu + sse\);\[IndentingNewLine]\), "\[IndentingNewLine]", 
+    \(\(sse\  = \ 
+        Mean[\[Lambda]iuQ]\ \[Lambda]ueQ + 
+          Mean[\[Lambda]uiQ] 
+            Mean[\[Lambda]ieQ] + \[Lambda]ueQ\ Mean[\[Lambda]ieQ];\)\), "\n", \
+
+    \(\(ssu\  = \ 
+        Mean[\[Lambda]eiQ]\ Mean[\[Lambda]iuQ] + 
+          Mean[\[Lambda]ieQ] Mean[\[Lambda]euQ] + 
+          Mean[\[Lambda]iuQ]\ Mean[\[Lambda]euQ];\)\), "\n", 
+    \(\(ssi\  = \ 
+        Mean[\[Lambda]euQ]\ Mean[\[Lambda]uiQ] + \[Lambda]ueQ\ \
+Mean[\[Lambda]eiQ] + 
+          Mean[\[Lambda]uiQ]\ Mean[\[Lambda]eiQ];\)\), "\[IndentingNewLine]", \
+
+    \(ssurateue = ssu\/\(ssu + sse\); 
+    sserateue = 
+      sse\/\(ssi + ssu + sse\);\[IndentingNewLine]\), "\[IndentingNewLine]", 
+    \(\(sse\  = \ 
+        Mean[\[Lambda]iuQ]\ Mean[\[Lambda]ueQ] + \[Lambda]uiQ\ \
+Mean[\[Lambda]ieQ] + Mean[\[Lambda]ueQ]\ Mean[\[Lambda]ieQ];\)\), "\n", 
+    \(\(ssu\  = \ 
+        Mean[\[Lambda]eiQ]\ Mean[\[Lambda]iuQ] + 
+          Mean[\[Lambda]ieQ] Mean[\[Lambda]euQ] + 
+          Mean[\[Lambda]iuQ]\ Mean[\[Lambda]euQ];\)\), "\n", 
+    \(\(ssi\  = \ 
+        Mean[\[Lambda]euQ]\ \[Lambda]uiQ + 
+          Mean[\[Lambda]ueQ]\ Mean[\[Lambda]eiQ] + \[Lambda]uiQ\ Mean[\
+\[Lambda]eiQ];\)\), "\[IndentingNewLine]", 
+    \(\(\(ssurateui = ssu\/\(ssu + sse\)\)\(;\)\(sserateui = 
+      sse\/\(ssi + ssu + sse\)\)\(;\)\(\[IndentingNewLine]\)\)\)}], "Input"],
+
+Cell[BoxData[{
+    \(\(Export["\<urate.dat\>", dateQ[ssurate]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<urate_ei.dat\>", 
+        dateQ[ssurateei]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<urate_eu.dat\>", 
+        dateQ[ssurateeu]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<urate_ie.dat\>", 
+        dateQ[ssurateie]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<urate_iu.dat\>", 
+        dateQ[ssurateiu]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<urate_ue.dat\>", 
+        dateQ[ssurateue]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<urate_ui.dat\>", 
+        dateQ[ssurateui]];\)\[IndentingNewLine]\), "\[IndentingNewLine]", 
+    \(\(Export["\<erate.dat\>", dateQ[sserate]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<erate_ei.dat\>", 
+        dateQ[sserateei]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<erate_eu.dat\>", 
+        dateQ[sserateeu]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<erate_ie.dat\>", 
+        dateQ[sserateie]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<erate_iu.dat\>", 
+        dateQ[sserateiu]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<erate_ue.dat\>", 
+        dateQ[sserateue]];\)\), "\[IndentingNewLine]", 
+    \(\(Export["\<erate_ui.dat\>", dateQ[sserateui]];\)\)}], "Input"]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 715}},
+WindowSize->{1344, 921},
+WindowMargins->{{1142, Automatic}, {Automatic, 126}}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 183, 3, 77, "Input"],
+Cell[1940, 56, 139, 3, 49, "Input"],
+Cell[2082, 61, 1573, 33, 98, "Input"],
+Cell[3658, 96, 1609, 35, 98, "Input"],
+Cell[5270, 133, 887, 16, 98, "Input"],
+Cell[6160, 151, 81, 1, 35, "Input"],
+
+Cell[CellGroupData[{
+Cell[6266, 156, 292, 5, 56, "Input"],
+Cell[6561, 163, 38, 1, 35, "Output"]
+}, Open  ]],
+Cell[6614, 167, 786, 16, 161, "Input"],
+Cell[7403, 185, 83, 1, 35, "Input"],
+
+Cell[CellGroupData[{
+Cell[7511, 190, 148, 3, 34, "Subsubsection"],
+Cell[7662, 195, 154, 3, 35, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7853, 203, 198, 4, 34, "Subsubsection"],
+Cell[8054, 209, 3401, 66, 616, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11492, 280, 41, 0, 34, "Subsubsection"],
+Cell[11536, 282, 526, 11, 140, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[12099, 298, 111, 3, 34, "Subsubsection"],
+Cell[12213, 303, 459, 8, 144, "Input"],
+Cell[12675, 313, 3994, 88, 722, "Input"],
+Cell[16672, 403, 1271, 25, 329, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

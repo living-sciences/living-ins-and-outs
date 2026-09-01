@@ -1,0 +1,20 @@
+{
+  "claim_id": "C3",
+  "status": "match",
+  "structured": {
+    "observed_behavior": "The reproduced two-state series show the job finding probability F_t is strongly procyclical: HP-detrended quarterly F_t correlates -0.965 with the unemployment rate (shipped 1951-2005 vintage) and -0.960 on the reconstructed 1948-2010 sample, i.e. F_t moves tightly (inversely) with the cycle. The employment exit probability X_t is far less cyclical: its detrended correlation with unemployment is only 0.649 (shipped) / 0.681 (1948-2010). The Table 1 variance decomposition attributes the overwhelming share of cyclical unemployment to the job-finding rate (finding contribution 0.79 vs exit 0.22 over the full sample), and this asymmetry widens sharply in recent decades: on the 1987+ subsample the finding contribution rises to 0.95 while the exit contribution collapses to 0.05 (paper's 1987-2010 column 0.90/0.10), demonstrating that X_t is essentially acyclic in the last two decades.",
+    "claim_paraphrase": "The job finding probability F_t fluctuates strongly at business-cycle frequencies and tracks the unemployment rate (dominant cyclical driver), whereas the employment exit probability X_t is comparatively acyclic, especially from the mid-1980s onward.",
+    "semantic_match": true
+  },
+  "rationale": "Step 2 output output/two_state/summary.json reports corr_findQ_urateQ = -0.9652 versus corr_sepQ_urateQ = 0.6493, and the 1948-2010 reconstruction (output/two_state_1948_2010/summary.json) gives -0.9602 vs 0.6809 \u2014 the job-finding probability co-moves with the cycle far more tightly than the exit probability, exactly the asymmetry the claim asserts. The Table 1 decompositions confirm the magnitude and the temporal sharpening: output/table1_shipped.json gives finding=0.791/exit=0.217 for the full sample and finding=0.952/exit=0.046 for the 1987+ subsample, and step 5 (replication_log.json) reproduces the paper's columns (1948-2010 0.77/0.24 up to 1987-2010 0.90/0.10), so the exit rate becomes progressively more acyclic in the recent decades. The Python port validated against the shipped notebook values (find.dat to 2.2e-16, notebook-printed corr -0.9652268 reproduced), and the only fix (splice_tail, fix_severity.json 'major') affects only the 2005-2010 sample extension and does not touch this qualitative cyclicality conclusion. Evidence unambiguously demonstrates the described behavior.",
+  "evidence_refs": [
+    "output/replication/codebase/output/two_state/summary.json",
+    "output/replication/codebase/output/two_state_1948_2010/summary.json",
+    "output/replication/codebase/output/table1_shipped.json",
+    "output/replication/codebase/output/table1_1948_2010.json",
+    "output/replication/replication_log.json",
+    "output/assess/fix_severity.json",
+    "output/analyze/replication_plan.json"
+  ],
+  "graded_by": "agent"
+}

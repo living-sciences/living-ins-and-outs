@@ -1,0 +1,40 @@
+{
+  "schema": "sai.followup.result_card/v1",
+  "headline": "The 2026 update keeps Shimer's job-finding story (β_F≈0.89 in normal times) but adds one rare 'layoff regime' — active only 0.2% of months (March–April 2020) — where separations drive 81% of the unemployment surge; meanwhile the flows have slowed (ω: 0.47→0.34), making unemployment 53% more persistent.",
+  "status": "completed",
+  "metrics": [
+    {"label": "Separation share of the u-surge, 2020", "value": "0.81", "baseline": "≈0.16",
+     "baseline_label": "constant-β (paper) model / 2008 recession = 0.17", "note": "the one episode the original model cannot generate"},
+    {"label": "Mean employment-exit prob. X̄", "value": "0.021 (2010–2026)", "baseline": "0.033 (1948–2010)",
+     "baseline_label": "001 c2_descriptive.json", "note": "Shimer's secular decline continued"},
+    {"label": "Adjustment speed ω = F̄+X̄", "value": "0.34 (2026)", "baseline": "0.47 (paper era)",
+     "baseline_label": "this study, 001 monthly series", "note": "→ persistence ρ 0.53→0.66, half-life +53%"},
+    {"label": "Extreme layoff-regime prob. π_L", "value": "0.0021", "baseline": "0 (in paper sample)",
+     "baseline_label": "1948–2010 had no such episode", "note": "2 months in 940; 2020 sep-deviation = 4.2× the pre-2015 record"},
+    {"label": "3-state separation contrib. λ^EU", "value": "0.55 (2010–2026 incl-2020)", "baseline": "0.16 (1990–2019)",
+     "baseline_label": "001 estimates_by_window.csv", "note": "finding contrib. λ^UE falls 0.50→0.15 only across 2020"}
+  ],
+  "tables": [
+    {"title": "Regime-switching decomposition (β_F = job-finding share of u fluctuations)",
+     "columns": ["Regime", "Probability", "β_F", "Separations (λ^EU)"],
+     "rows": [
+       ["Normal (1987–2019)", "0.90", "0.90", "0.16"],
+       ["Normal, recent (2010–26 ex-2020)", "≈0.90", "0.84", "0.17"],
+       ["Layoff-inclusive (2010–26 in-2020)", "—", "0.54", "0.55"],
+       ["Extreme layoff (Mar–Apr 2020)", "0.0021", "≈0.2", "0.55"]
+     ],
+     "highlight_row": 3}
+  ],
+  "figures": [
+    {"file": "results/fig1_theory_update.png",
+     "caption": "A: separation share of each postwar recession's unemployment surge — 2020 (0.81, orange) is the lone regime above the constant-β model's ~0.16 band; 2008 (0.17) confirms the original story out of sample. B: the flows have slowed secularly (ω=F̄+X̄, blue) so unemployment-deviation persistence ρ=1−ω (orange) has risen, lengthening the half-life 1.08→1.66 months.",
+     "alt": "Two panels. Left: bar chart of separation share by recession, all near a dashed 0.16 line except a tall orange 2020 bar at 0.81. Right: blue line of adjustment speed falling from ~0.55 to ~0.34 over 1950–2026 with a dashed orange persistence line rising."}
+  ],
+  "notes": [
+    "Reuses follow-up 001's constructed FRED series (vintage 2026-08-24); no re-fetching or re-running the original pipeline. Original comparison values read from 001 CSVs / the paper text (cited in report.md).",
+    "Compute-modest per instruction: regime probabilities are frequencies and β's are the paper's OLS decomposition on regime subsamples/windows — calibration to moments 001 produced, not a likelihood-based Markov-switching estimation.",
+    "β_F^L's magnitude is calibrated to 2020-inclusive windows, not predicted out-of-sample: 2020 is the only extreme layoff on record, so its size is unpredictable from history — itself the tail-risk finding. The OOS-validated part is the regime classifier (flags exactly Mar–Apr 2020).",
+    "2020 is sub-quarterly; analysis is monthly and the clipped March-2020 F point is handled with a clip-immune separation hypothetical (with the clip kept, recent steady-state corr spuriously collapses to 0.24)."
+  ],
+  "report_file": "report.md"
+}

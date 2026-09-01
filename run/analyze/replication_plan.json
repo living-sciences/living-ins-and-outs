@@ -1,0 +1,134 @@
+{
+  "environment": {
+    "language": "Python 3 (faithful port of the shipped Mathematica notebooks) plus the original Wolfram notebooks if a Wolfram kernel can be provisioned",
+    "key_dependencies": [
+      "numpy",
+      "scipy",
+      "pandas",
+      "statsmodels",
+      "matplotlib",
+      "requests (for FRED CSV downloads)"
+    ],
+    "setup_hints": "The analysis is CPU-bound and lightweight (a few hundred monthly observations); no GPU is needed. The provided code path is Mathematica 5.0 (findsep/u-v-f-s.nb and grossflows/three-state.nb). Mathematica is not installed in this environment. First attempt to install and run the free Wolfram Engine / wolframscript; if license activation fails offline, fall back to a faithful Python port that reproduces the notebook's exact formulas (job-finding eq. (4) F_t = 1 - (u_{t+1} - u^s_{t+1})/u_t; employment-exit eq. (5) solved for x_t by 1-D root finding; the notebook's explicit HP-filter penalty matrix with smoothing parameter 10^5 applied in logs; quarterly averaging by 3-month blocks; and the Table 1 / Table 2 decompositions as OLS regression coefficients of a detrended hypothetical unemployment/employment rate on the detrended actual rate, per footnotes 11 and 20). State explicitly in any run log that a code port was used in place of the Mathematica kernel. Unzip findsep.zip and grossflows.zip into the working copy before running. The container is assumed to reach FRED (fred.stlouisfed.org fredgraph CSV endpoint) for the data-reconstruction step; record the download vintage."
+  },
+  "steps": [
+    {
+      "id": 1,
+      "description": "Prepare the working copy and environment. Copy the repo into /workspace/output/replication/codebase/, unzip findsep.zip and grossflows.zip, and install the Python dependencies. Attempt to provision a Wolfram kernel (wolframscript); if unavailable, record that the Mathematica notebooks will be reproduced via a Python port. Inventory the unpacked inputs: findsep/ must contain unemp.txt, emp.txt, short.txt, shortadj.txt, helpwant.txt and the notebook u-v-f-s.nb; grossflows/ must contain three-state.nb, the match_*.do Stata scripts and flows_67.dta; the repo root must contain the quarterly instantaneous-rate outputs ei.dat, eu.dat, ie.dat, iu.dat, ue.dat, ui.dat and the two-state find.dat, sep.dat.",
+      "command_hint": "cp -r /workspace/repo /workspace/output/replication/codebase && cd /workspace/output/replication/codebase && unzip -o findsep.zip && unzip -o grossflows.zip && pip install numpy scipy pandas statsmodels matplotlib requests; (which wolframscript && wolframscript -version) || echo 'no wolfram kernel -> python port'",
+      "expected_outcome": "Working copy exists at /workspace/output/replication/codebase/ with findsep/*.txt input files, both .nb notebooks, and the six three-state .dat files plus find.dat/sep.dat present. A log line records whether a Wolfram kernel is available or a Python port will be used. No numerical results produced yet.",
+      "verifies": []
+    },
+    {
+      "id": 2,
+      "description": "Reproduce the two-state job-finding / employment-exit construction by running the shipped u-v-f-s.nb code path on the shipped 1951-2005 aggregate data. Build the microdata-adjusted short-term-unemployment series (multiply shortadj.txt shares by the unemployment level from 1976 on, splice published short.txt before 1976), compute F_t from eq. (4) and f_t = -log(1-F_t), solve eq. (5) for the exit rate x_t each month by root finding, form X_t = 1-exp(-x_t) and the time-aggregation-ignoring X-tilde_t = u^s_{t+1}/e_t (eq. (6) with F-tilde=F), and take 3-month quarterly averages. Save the quarterly F_t, X_t, X-tilde_t, and unemployment-rate series; report the post-war mean of F_t and X_t, the peak-to-trough log change in F_t, the standard deviation of the HP-detrended (smoothing 10^5, in logs) X_t and X-tilde_t, and the monthly correlation between the end-of-month unemployment rate u_{t+1}/l_{t+1} and the steady-state approximation x_t/(x_t+f_t). Emit Figure 1 (F_t top panel; X_t and X-tilde_t bottom panel) and Figure 2 (F_t and X_t against the unemployment rate).",
+      "command_hint": "cd /workspace/output/replication/codebase && python run_two_state.py --data findsep --start 1951 --hp 1e5 --out output/two_state",
+      "expected_outcome": "Regenerates output/two_state/find.dat and output/two_state/sep.dat (columns: decimal-quarter date, value) matching the shape of the shipped find.dat/sep.dat, plus xtilde.q.dat and urate.q.dat. Writes output/two_state/summary.json with fields mean_F, mean_X (floats), F_peak_to_trough_logpoints (float), sd_detrended_X, sd_detrended_Xtilde (floats), and corr_urate_ss (float in [-1,1]). Writes output/two_state/figure1.pdf and figure2.pdf. A log line notes the Python port (or Wolfram kernel) was used.",
+      "verifies": [
+        "C3",
+        "C5",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C27"
+      ]
+    },
+    {
+      "id": 3,
+      "description": "Reproduce the Table 1 decomposition on the shipped-vintage series from step 2. Following footnote 11, construct the two hypothetical unemployment rates x-bar/(x-bar+f_t) (only the job-finding rate varies) and x_t/(x_t+f-bar) (only the exit rate varies), HP-detrend each and the actual unemployment rate in logs (smoothing 10^5), and regress each detrended hypothetical rate on the detrended actual rate; the slope coefficients are the job-finding and exit-rate contributions. Run for the full available sample and for the recent sub-sample beginning 1987 (the two columns computable from whole-population aggregate data). Report both slope coefficients per sample.",
+      "command_hint": "cd /workspace/output/replication/codebase && python table1_decomp.py --series output/two_state --samples full,1987 --hp 1e5 --out output/table1_shipped.json",
+      "expected_outcome": "Writes output/table1_shipped.json: a mapping from sample label ('full','1987') to {finding_contribution: float, exit_contribution: float} where the two entries per sample sum to roughly 1. Structure mirrors Table 1 columns (job-finding vs exit-rate contribution).",
+      "verifies": [
+        "C1",
+        "C4"
+      ]
+    },
+    {
+      "id": 4,
+      "description": "Reconstruct the two-state inputs at the paper's full 1948-2010 scale from public BLS data so the paper's exact samples can be run. Download from FRED the seasonally-adjusted monthly series the paper documents: unemployment level UNEMPLOY (LNS13000000), civilian employment level CE16OV (LNS12000000), and unemployed less than 5 weeks UEMPLT5 (LNS13008396), 1948M1-2010M12. Apply the Appendix A short-term-unemployment redesign correction using the shipped shortadj.txt microdata shares for 1976M1-2005M1; for 2005M2-2010M12, where the CPS-microdata share is not available in the package, splice the published UEMPLT5 series and record this as an explicit vintage/definition limitation in the run log. Re-run the step-2 two-state construction on these 1948-2010 inputs.",
+      "command_hint": "cd /workspace/output/replication/codebase && python fetch_fred.py --series UNEMPLOY,CE16OV,UEMPLT5 --start 1948-01 --end 2010-12 --out output/fred && python run_two_state.py --data output/fred --shortadj findsep/shortadj.txt --start 1948 --hp 1e5 --out output/two_state_1948_2010",
+      "expected_outcome": "Writes output/fred/*.csv raw downloads (with a recorded vintage date) and output/two_state_1948_2010/find.dat, sep.dat, xtilde.q.dat, urate.q.dat spanning 1948-2010. summary.json reports mean_F, mean_X, and F_peak_to_trough_logpoints over the full 1948-2010 sample. Log explicitly flags the 2005-2010 short-term-unemployment adjustment as reconstructed from the published series.",
+      "verifies": [
+        "C6"
+      ]
+    },
+    {
+      "id": 5,
+      "description": "Reproduce the headline Table 1 decomposition at the paper's exact samples using the 1948-2010 reconstructed series from step 4. Compute the job-finding and exit-rate contribution slope coefficients (as in step 3) for the full post-war 1948-2010 sample and for the 1987-2010 sample, and for the intermediate columns of Table 1 (progressively later start dates) computable from whole-population aggregate data.",
+      "command_hint": "cd /workspace/output/replication/codebase && python table1_decomp.py --series output/two_state_1948_2010 --samples 1948,1948b,1948c,1987 --hp 1e5 --out output/table1_1948_2010.json",
+      "expected_outcome": "Writes output/table1_1948_2010.json: mapping from sample label to {finding_contribution: float, exit_contribution: float}, one entry per Table 1 column that uses whole-population data (full 1948-2010 and 1987-2010 at minimum), the two contributions per column summing to roughly 1.",
+      "verifies": [
+        "C1",
+        "C2",
+        "C4"
+      ]
+    },
+    {
+      "id": 6,
+      "description": "Reproduce the three-state (E/U/I) decomposition by running the second half of grossflows/three-state.nb on the shipped quarterly instantaneous-rate series ei.dat, eu.dat, ie.dat, iu.dat, ue.dat, ui.dat (these are the notebook's already-time-aggregated lambda outputs; the upstream construction of lambda from monthly gross-flow probabilities requires ~42GB of CPS microdata and Stata, which are not in the package, so the shipped lambda series are used as the entry point and this is noted). Compute the steady-state unemployment-rate and employment-population-rate measures and the six single-rate hypotheticals of eq. (7)/(8) (each of the six transition rates allowed to vary while the other five are held at their 1967-2010 means), then obtain the Table 2 entries as OLS slopes of each detrended hypothetical rate on the detrended actual rate (footnote 20), for both the unemployment rate and the employment-population ratio, over the available sample and its post-1987 sub-sample. Also compute the correlation between the three-state steady-state unemployment measure and the actual unemployment rate in quarterly-averaged data.",
+      "command_hint": "cd /workspace/output/replication/codebase && python three_state_decomp.py --rates . --hp 1e5 --samples full,1987 --out output/table2.json",
+      "expected_outcome": "Writes output/table2.json with, for each of urate and emp_pop_ratio and each sample, a mapping of the six transition rates {UE,EU,UI,IU,EI,IE} to a slope coefficient (floats; per-column entries summing to roughly 1 for the urate decomposition). Also writes a field corr_ss_urate (float in [-1,1]) for the steady-state-vs-actual unemployment correlation, and output/figure5.pdf plotting the hypothetical urate series against the actual urate.",
+      "verifies": [
+        "C16",
+        "C17",
+        "C18",
+        "C19"
+      ]
+    },
+    {
+      "id": 7,
+      "description": "Reproduce the Figure 4 cross-check comparing the two-state probabilities with the three-state transition probabilities. Convert the shipped quarterly UE and EU instantaneous rates to full-month transition probabilities Lambda^AB = 1-exp(-lambda^AB), and compare the UE probability against the two-state job-finding probability F_t and the EU probability against the two-state employment-exit probability X_t (from step 2), on the overlapping quarterly sample. Report the correlation between F_t and Lambda^UE and their mean log-level difference (log points), and the correlation between X_t and Lambda^EU and their mean log-level difference; emit the two-panel Figure 4.",
+      "command_hint": "cd /workspace/output/replication/codebase && python figure4_compare.py --two_state output/two_state --rates . --out output/figure4.json",
+      "expected_outcome": "Writes output/figure4.json with fields corr_F_UE, mean_logdiff_F_UE, corr_X_EU, mean_logdiff_X_EU (floats; correlations in [-1,1], log differences in log points). Writes output/figure4.pdf with a top panel overlaying F_t and Lambda^UE and a bottom panel overlaying X_t and Lambda^EU on the common sample.",
+      "verifies": [
+        "C13",
+        "C14",
+        "C15"
+      ]
+    }
+  ],
+  "claim_coverage": [
+    {
+      "claim_id": "C12",
+      "disposition": "blocked",
+      "reason": "Figure 3 (prime-age men 25-54) requires CPS microdata restricted to that demographic; the package ships only whole-population BLS aggregate txt series and gross-flow Stata scripts needing ~42GB of un-shipped CPS microdata (checked findsep/, grossflows/, and all 24 repo files)."
+    },
+    {
+      "claim_id": "C20",
+      "disposition": "out_of_scope",
+      "reason": "Alternative job-finding measures M_t (medium-term-unemployment based) and D_t (mean-duration based) are reconstructable from public FRED series (UEMPMEAN, UEMP5TO14) but the package ships no code path for them and they are a Section-4 supporting comparison; deprioritized."
+    },
+    {
+      "claim_id": "C21",
+      "disposition": "blocked",
+      "reason": "Job-loser-share and reason-for-unemployment job-finding rates and the F^comp/F^real decomposition require CPS microdata by reason for unemployment; not shipped and no script provided (checked all repo files)."
+    },
+    {
+      "claim_id": "C22",
+      "disposition": "blocked",
+      "reason": "Figure 9 (real vs compositional job finding across seven observable dimensions) requires the CPS microdata cross-tabulations; the package ships no microdata or script for the compositional decomposition."
+    },
+    {
+      "claim_id": "C23",
+      "disposition": "blocked",
+      "reason": "Three-state EU+EI sums, employer-to-employer transitions, and the quarterly job-destruction rate rely on gross-flow microdata plus external E2E / job-destruction sources; none shipped and no code path present."
+    },
+    {
+      "claim_id": "C24",
+      "disposition": "blocked",
+      "reason": "Short-term-unemployment shares in the full CPS vs incoming rotation groups (1976-1993 vs 1994-2010) require CPS microdata tabulated by rotation group; only a single derived aggregate share (shortadj.txt) is shipped, not the rotation-group tabulation this claim compares."
+    },
+    {
+      "claim_id": "C25",
+      "disposition": "blocked",
+      "reason": "Comparison against Bleakley's independent gross-flow estimates requires Bleakley's series, which is not included in the package (checked grossflows/ and repo root; only flows_67.dta from Ritter is present)."
+    },
+    {
+      "claim_id": "C26",
+      "disposition": "out_of_scope",
+      "reason": "Figure 7 (three alternative job-finding measures F_t, D_t, M_t) is reconstructable from public FRED data but the package ships no code for M_t/D_t; deprioritized as an appendix-style robustness comparison, same basis as C20."
+    }
+  ]
+}

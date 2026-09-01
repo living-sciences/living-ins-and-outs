@@ -1,0 +1,37 @@
+{
+  "paper": "Shimer, Robert (2012), 'Reassessing the Ins and Outs of Unemployment', Review of Economic Dynamics 15(2), 127-148.",
+  "environment": {
+    "python_version": "3.12.8",
+    "gpu_available": true,
+    "gpu_model": "NVIDIA RTX A6000 (x4, 49140 MiB each)",
+    "gpu_used": false,
+    "gpu_note": "Task is small-scale econometrics/time-series (a few hundred quarterly observations); no GPU-capable step.",
+    "wolfram_kernel_available": false,
+    "key_packages": {"numpy": "2.5.2", "scipy": "1.18.1", "pandas": "3.0.5", "matplotlib": "3.11.1", "requests": "2.34.2"}
+  },
+  "reproduction_approach": "No Wolfram/Mathematica kernel in the environment. Both shipped notebooks (findsep/u-v-f-s.nb, grossflows/three-state.nb) were reproduced with faithful Python ports (shimer_common.py + run_two_state.py + table1_decomp.py + three_state_decomp.py + figure4_compare.py). Ports validated against values printed inside the shipped notebooks and against the shipped .dat outputs.",
+  "validation_highlights": {
+    "step2_find_dat_max_abs_diff_vs_shipped": 2.2e-16,
+    "step2_sep_dat_max_abs_diff_vs_shipped": 2.2e-13,
+    "step2_corr_findQ_urateQ": "-0.96523 (notebook printed -0.96522683)",
+    "step2_corr_sepQ_urateQ": "0.64928 (notebook printed 0.64928179)",
+    "step3_full_finding_slope": "0.79115 (matches notebook printed regression x-coefficient exactly)",
+    "step4_1948_2010_mean_F": "0.4412 (paper 0.44)",
+    "step4_1948_2010_mean_X": "0.03355 (paper 0.034)",
+    "step4_1948_2010_sd_detrended_X": "0.0768 (paper ~0.07)",
+    "step4_1948_2010_corr_urate_ss": "0.9827 (paper 0.98)",
+    "step5_table1_1948_2010": "finding 0.763 / exit 0.245 (paper 0.77 / 0.24)",
+    "step5_table1_1976_2010": "finding 0.838 / exit 0.166 (paper 0.85 / 0.15)",
+    "step6_table2_urate_1967": "EU 0.22, EI -0.04, UE 0.50, UI 0.18, IE 0.07, IU 0.10 (paper 0.22/-0.05/0.49/0.17/0.08/0.12)",
+    "step6_corr_ss_urate": "0.9910 (paper 0.99)",
+    "step7_corr_F_UE": 0.9474,
+    "step7_corr_X_EU": 0.8503
+  },
+  "documented_limitations": [
+    "Mathematica notebooks reproduced via Python port (no Wolfram kernel).",
+    "Step 4/5: shipped CPS-microdata short-term-unemployment shares (shortadj.txt) cover only 1976M1-2005M1; for 2005M2-2010M12 the published UEMPLT5 level is spliced in (uncorrected for the 1994 CPS redesign tail). This mildly biases the recent-sample exit contribution upward vs the paper, visible in Table 1 columns 3-4 (finding slopes ~0.84-0.86 vs paper 0.85-0.90).",
+    "Step 6/7: three-state instantaneous rates (ei/eu/ie/iu/ue/ui .dat) are used as the entry point, as directed; upstream lambda construction needs ~42GB CPS microdata + Stata, absent here. The shipped lambda series end 2004Q4, so 'full/1967-2010' samples are effectively 1967Q2-2004Q4 and the fixed means are 1967-2004 means.",
+    "Step 6: Table 2 regressions use measured references (u/(u+e) and EMRATIO) downloaded from FRED and quarterly-averaged; timing (contemporaneous quarterly vs paper's u_{t+1}) differs slightly. corr(steady-state,measured)=0.99 so slopes are robust.",
+    "FRED data downloaded 2026-08-24 is a later vintage than the paper's 2010-2011 vintage; small revisions contribute to residual differences."
+  ]
+}

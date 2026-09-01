@@ -1,0 +1,9 @@
+{
+  "claim_id": "C25",
+  "status": "not_attempted",
+  "structured": {},
+  "rationale": "No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Comparison against Bleakley's independent gross-flow estimates requires Bleakley's series, which is not included in the package (checked grossflows/ and repo root; only flows_67.dta from Ritter is present).",
+  "evidence_refs": [],
+  "not_attempted_reason": "authors_missing",
+  "graded_by": "deterministic"
+}

@@ -1,0 +1,16 @@
+parameter,symbol,paper_era_1948_2010,value_2026,label,moment_or_source
+mean job-finding probability,F_bar,0.44,0.321,ESTIMATED,"mean of monthly F_t, eq.(4), 1948-2010 vs 2010-2026"
+mean employment-exit probability,X_bar,0.033,0.021,ESTIMATED,"mean of monthly X_t, eq.(5); secular decline 3.3%->2.1%"
+exit/finding ratio,X_bar/F_bar,0.076,0.066,ESTIMATED,sets the implied steady-state u level
+adjustment speed,omega=F_bar+X_bar,0.473,0.342,ESTIMATED,monthly convergence rate of u toward steady state
+monthly persistence of u deviations,rho=1-omega,0.527,0.658,CALIBRATED,implied by omega; higher => more sluggish unemployment
+half-life of u deviation (months),t_half,1.08,1.66,CALIBRATED,ln(0.5)/ln(rho); +53% => slower labor-market dynamics
+implied steady-state unemployment,u*=X/(X+F),0.071,0.062,ESTIMATED,lower natural rate as both flows fall
+steady-state approx quality (corr),"corr(u,u*)",0.945,0.924,ESTIMATED,clip-dropped; recent w/2020 clip collapses to 0.24
+beta_F normal regime,beta_F^N,0.77 (1948-2010) / 0.90 (1987-2019),0.843,ESTIMATED,001 windows; job-finding explains ~0.84-0.90 out of 2020
+beta_F layoff-inclusive,beta_F (incl 2020),n/a (pre-2020),0.538,ESTIMATED,2010-2026 incl-2020 two-state window (001)
+beta_X layoff-inclusive,beta_X (incl 2020),<=0.24,0.38,ESTIMATED,separations largest of any window (001)
+3-state separation contribution,EU,0.164,0.551,ESTIMATED,normal 1990-2019 vs 2010-2026 incl-2020 (001)
+3-state finding contribution,UE,0.502,0.15,ESTIMATED,finding collapses only across the 2020 layoff
+"layoff-regime probability (extreme, monthly)",pi_L,0 (in paper sample),0.0021,ESTIMATED,months breaching the pre-2015 separation record (2020-03/04)
+2020 separation share of the u surge,sep_share_2020,n/a,0.811,ESTIMATED,monthly episode decomposition; vs ~0.16 in every other recession

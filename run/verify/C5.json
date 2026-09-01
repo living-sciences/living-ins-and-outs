@@ -1,0 +1,18 @@
+{
+  "claim_id": "C5",
+  "status": "match",
+  "structured": {
+    "replicated_value": 0.44,
+    "paper_value": 0.44,
+    "uncertainty": null,
+    "value_found": true
+  },
+  "rationale": "The claim is about the job finding probability F_t averaging 44% over the post-war period (1948-2010). find.dat stores the instantaneous job finding rate f_t, and the verification instruction says to convert with F_t = 1 - exp(-f_t) before averaging. The 1948-2010 reconstruction produced by the pipeline, /workspace/output/replication/codebase/output/two_state_1948_2010/find.dat, contains 251 quarterly-spaced points spanning 1948.0-2010.5. The raw mean of f_t is 0.5945; converting each to F_t = 1 - exp(-f_t) and averaging gives 0.4422, i.e. 0.44 to two decimals (0.5% relative error vs the paper's 0.44). The shipped 1951-2004.75 vintage (find.dat / output/two_state/find.dat) similarly gives mean F = 0.4540. Both are well within the 5% band; the 1948-2010 sample matching the claim's stated post-war window lands almost exactly on 0.44.",
+  "evidence_refs": [
+    "output/replication/codebase/output/two_state_1948_2010/find.dat",
+    "output/replication/codebase/find.dat",
+    "output/replication/codebase/output/two_state/find.dat",
+    "output/analyze/replication_plan.json"
+  ],
+  "graded_by": "agent"
+}

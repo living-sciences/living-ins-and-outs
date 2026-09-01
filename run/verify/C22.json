@@ -1,0 +1,9 @@
+{
+  "claim_id": "C22",
+  "status": "not_attempted",
+  "structured": {},
+  "rationale": "No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Figure 9 (real vs compositional job finding across seven observable dimensions) requires the CPS microdata cross-tabulations; the package ships no microdata or script for the compositional decomposition.",
+  "evidence_refs": [],
+  "not_attempted_reason": "authors_missing",
+  "graded_by": "deterministic"
+}

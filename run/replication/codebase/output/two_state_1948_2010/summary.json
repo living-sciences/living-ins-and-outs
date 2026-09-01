@@ -1,0 +1,13 @@
+{
+  "mean_F": 0.4411773457564217,
+  "mean_X": 0.033546628708122764,
+  "F_peak_to_trough_logpoints": 1.3035957160905884,
+  "sd_detrended_X": 0.07681409225357501,
+  "sd_detrended_Xtilde": 0.10858136183993762,
+  "corr_urate_ss": 0.9826679029233265,
+  "corr_findQ_urateQ": -0.9601884698195886,
+  "corr_sepQ_urateQ": 0.6809097971897625,
+  "n_quarters": 251,
+  "sample": "1948:M1-2010:M12",
+  "engine": "python-port-of-u-v-f-s.nb"
+}

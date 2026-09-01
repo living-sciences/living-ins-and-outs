@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Replication Report</title>
+<style>
+  :root {
+    --match: #1a7f37; --partial: #9a6700; --nomatch: #cf222e;
+    --na: #57606a; --bg: #f6f8fa; --card: #ffffff; --ink: #1f2328;
+    --muted: #57606a; --line: #d0d7de; --accent: #0969da;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink); background: var(--bg); margin: 0; line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 28px 22px 60px; }
+  h1 { font-size: 22px; margin: 0 0 2px; }
+  h2 { font-size: 17px; margin: 28px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  h3 { font-size: 14px; margin: 16px 0 4px; color: var(--ink); }
+  p { margin: 6px 0; }
+  .sub { color: var(--muted); font-size: 13px; }
+  a { color: var(--accent); text-decoration: none; }
+  code { background: var(--bg); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; font-size: 12.5px; }
+
+  /* Verdict card */
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; margin-top: 14px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .hero { display: flex; gap: 22px; align-items: center; }
+  .gauge { flex: 0 0 auto; }
+  .hero-body { flex: 1 1 auto; }
+  .badge { display: inline-block; font-weight: 600; font-size: 12px; letter-spacing: .02em; padding: 3px 10px; border-radius: 999px; color: #fff; }
+  .bottomline { font-size: 16px; font-weight: 500; margin: 8px 0 10px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted); font-size: 13px; }
+  .stats b { color: var(--ink); }
+
+  /* Tier bar */
+  .bar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); margin: 4px 0 2px; }
+  .bar > span { display: block; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+
+  /* Claim chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 6px; }
+  .chip { font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: #fff; font-weight: 500; }
+
+  /* Tables */
+  table { border-collapse: collapse; width: 100%; font-size: 13px; margin: 8px 0; }
+  th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  .st { font-weight: 600; }
+
+  details { margin: 8px 0; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+  details > summary { cursor: pointer; padding: 9px 12px; font-weight: 600; font-size: 13.5px; }
+  details[open] > summary { border-bottom: 1px solid var(--line); }
+  details .inner { padding: 4px 14px 12px; }
+  .refs { font-size: 12.5px; color: var(--muted); }
+  .refs code { font-size: 12px; }
+  footer { margin-top: 34px; color: var(--muted); font-size: 12px; text-align: center; }
+  @media print { body { background: #fff; } .card { box-shadow: none; } details { border: none; } details > summary { display: none; } details .inner { padding: 0; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Replication Report</h1>
+  <div class="sub">Mode: full · Generated 2026-08-24 21:50</div>
+
+  <!-- VERDICT CARD -->
+  <div class="card">
+    <div class="hero">
+      <div class="gauge">
+        <svg width="104" height="104" viewBox="0 0 104 104" role="img" aria-label="Replication score 63%">
+          <circle cx="52" cy="52" r="46" fill="none" stroke="#eaeef2" stroke-width="10"/>
+          
+          <circle cx="52" cy="52" r="46" fill="none" stroke="#9a6700" stroke-width="10"
+                  stroke-linecap="round" stroke-dasharray="182.7 289.0"
+                  transform="rotate(-90 52 52)"/>
+          <text x="52" y="50" text-anchor="middle" font-size="22" font-weight="700" fill="#1f2328">63%</text>
+          <text x="52" y="68" text-anchor="middle" font-size="10" fill="#57606a">score</text>
+          
+        </svg>
+      </div>
+      <div class="hero-body">
+        <span class="badge" style="background: #9a6700">Partially reproduced</span>
+        
+        <div class="stats">
+          <span><b>13/25</b> claims reproduced</span>
+          <span><b>5</b> partial</span>
+          <span><b>1</b> did not reproduce</span>
+          
+          <span><b>1</b> fix applied</span>
+          
+        </div>
+      </div>
+    </div>
+
+    
+    <h3 style="margin-top:16px">Claims at a glance</h3>
+    <div class="bar" aria-hidden="true">
+      <span style="width: 48.15%; background: var(--match)"></span>
+      <span style="width: 18.52%; background: var(--partial)"></span>
+      <span style="width: 3.7%; background: var(--nomatch)"></span>
+      <span style="width: 22.22%; background: var(--na)"></span>
+    </div>
+    <div class="legend">
+      <span><i style="background: var(--match)"></i>match 13</span>
+      <span><i style="background: var(--partial)"></i>partial 5</span>
+      <span><i style="background: var(--nomatch)"></i>no match 1</span>
+      <span><i style="background: var(--na)"></i>other 6</span>
+    </div>
+    
+    <div class="chips">
+      <span class="chip" style="background: #1a7f37" title="scalar · match">C1</span><span class="chip" style="background: #9a6700" title="scalar · partial">C2</span><span class="chip" style="background: #1a7f37" title="qualitative · match">C3</span><span class="chip" style="background: #9a6700" title="table · partial">C4</span><span class="chip" style="background: #1a7f37" title="scalar · match">C5</span><span class="chip" style="background: #1a7f37" title="scalar · match">C6</span><span class="chip" style="background: #1a7f37" title="scalar · match">C7</span><span class="chip" style="background: #1a7f37" title="scalar · match">C8</span><span class="chip" style="background: #1a7f37" title="scalar · match">C9</span><span class="chip" style="background: #1a7f37" title="figure · match">C10</span><span class="chip" style="background: #cf222e" title="figure · no_match">C11</span><span class="chip" style="background: #57606a" title="figure · not_attempted">C12</span><span class="chip" style="background: #1a7f37" title="scalar · match">C13</span><span class="chip" style="background: #1a7f37" title="scalar · match">C14</span><span class="chip" style="background: #9a6700" title="figure · partial">C15</span><span class="chip" style="background: #1a7f37" title="scalar · match">C16</span><span class="chip" style="background: #9a6700" title="table · partial">C17</span><span class="chip" style="background: #1a7f37" title="qualitative · match">C18</span><span class="chip" style="background: #9a6700" title="scalar · partial">C19</span><span class="chip" style="background: #8250df" title="scalar · out_of_scope">C20</span><span class="chip" style="background: #57606a" title="scalar · not_attempted">C21</span><span class="chip" style="background: #57606a" title="figure · not_attempted">C22</span><span class="chip" style="background: #57606a" title="scalar · not_attempted">C23</span><span class="chip" style="background: #57606a" title="scalar · not_attempted">C24</span><span class="chip" style="background: #57606a" title="scalar · not_attempted">C25</span><span class="chip" style="background: #8250df" title="figure · out_of_scope">C26</span><span class="chip" style="background: #1a7f37" title="qualitative · match">C27</span>
+    </div>
+    
+    
+  </div>
+
+  
+  <div class="card" style="border-color: #d4a72c; background: #fff8c5">
+    <b>Flags</b>
+    <ul style="margin:6px 0 0"><li>2 claim(s) marked out_of_scope (planner did not target them) — excluded from the score, not counted as failures. Score is over the 25 attempted/blocked claim(s).</li></ul>
+  </div>
+  
+
+  <!-- NARRATIVE (summary-first) -->
+  
+
+  <!-- LIMITATIONS -->
+  
+  <h2>Limitations &amp; code quality</h2>
+  
+  
+  <p class="sub">1 fix were needed to run the provided code (0 minor, 1 major, 0 critical). These describe the code, not the replication.</p>
+  <table>
+    <thead><tr><th>#</th><th>Fix</th><th>Severity</th></tr></thead>
+    <tbody><tr><td>1</td><td>Added an opt-in --splice_tail flag so the short-term series continues with the published level past the 2005M1 end of the microdata-share window, allowing the sample to extend to 2010M12.</td><td class="st" style="color: #9a6700">major</td></tr></tbody>
+  </table>
+  
+  
+
+  <!-- CITATION CHECK (advisory; a plain section so it also lands in the PDF) -->
+  
+
+  <!-- DETAILS (collapsible) -->
+  <h2>Details</h2>
+
+  <details>
+    <summary>Per-claim verdicts (27)</summary>
+    <div class="inner">
+      <table>
+        <thead><tr><th>ID</th><th>Tier</th><th>Type</th><th>Status</th><th>How graded</th><th>Why</th></tr></thead>
+        <tbody>
+        
+          <tr>
+            <td><code>C1</code></td><td>headline</td><td>scalar</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>The reproduced Table 1 decomposition is in output/table1_1948_2010.json. The column-1 case (all workers, period &#39;1948.00-2010.50&#39;) reports finding_contribution=0.7632 and exit_contribution=0.2453. Against the paper values (job_finding_sh...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C2</code></td><td>headline</td><td>scalar</td>
+            <td class="st" style="color: #9a6700">partial</td>
+            <td>agent</td>
+            <td>Step 5 (which verifies C2) produced output/table1_1948_2010.json, whose &#39;1987&#39; entry covers period 1987.00-2010.50 (95 quarters) — the paper&#39;s exact Table 1 column 4 sample — and reports finding_contribution=0.8584 and exit_contribution=...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C3</code></td><td>headline</td><td>qualitative</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>Step 2 output output/two_state/summary.json reports corr_findQ_urateQ = -0.9652 versus corr_sepQ_urateQ = 0.6493, and the 1948-2010 reconstruction (output/two_state_1948_2010/summary.json) gives -0.9602 vs 0.6809 — the job-finding probab...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C4</code></td><td>supporting</td><td>table</td>
+            <td class="st" style="color: #9a6700">partial</td>
+            <td>agent</td>
+            <td>The run produced output/table1_1948_2010.json (in the codebase output/ dir) with four of Table 1&#39;s five columns, computed on the reconstructed 1948-2010 series via the footnote-11 HP(1e5)/regression decomposition described in plan steps ...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C5</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>The claim is about the job finding probability F_t averaging 44% over the post-war period (1948-2010). find.dat stores the instantaneous job finding rate f_t, and the verification instruction says to convert with F_t = 1 - exp(-f_t) befo...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C6</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>The claim is a windowed, single-business-cycle amplitude: the job-finding probability F_t falls by about forty log points from a cyclical peak to the following trough &#39;during recent decades.&#39; The pipeline&#39;s summary.json reports F_peak_to...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C7</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>The claim asks for the post-war (1948-2010) mean of the employment exit probability X_t constructed via eq. (5), expected ~0.034. The run produced output/two_state_1948_2010/sep.dat covering exactly 1948:M1-2010:M12 (n=251 quarters) stor...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C8</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>The pipeline detrended both the exit-probability series X_t (eq. 5) and the time-aggregation-ignoring X-tilde_t (eq. 6 with F-tilde=F) with an HP filter (smoothing 1e5) and reported the standard deviations in summary.json. For the paper&#39;...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C9</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>The plan&#39;s step 2 (targeting this claim) ran the two-state construction on the shipped 1951:M1-2005:M1 aggregate data and produced corr_urate_ss=0.9872 (output/two_state/summary.json, line 7). The code confirms this is exactly the correl...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C10</code></td><td>supporting</td><td>figure</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>The claim&#39;s Figure 1 was reproduced at output/replication/codebase/output/two_state_1948_2010/figure1.pdf, which matches the claim&#39;s exact 1948Q1-2010Q4 span (step 2/step 4 of the plan, verifies C10). The exact expected_output_file outpu...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C11</code></td><td>supporting</td><td>figure</td>
+            <td class="st" style="color: #cf222e">no match</td>
+            <td>agent</td>
+            <td>The claim describes the paper&#39;s Figure 2 as a two-panel time series in which a hypothetical unemployment rate driven only by job-finding fluctuations (x-bar/(x-bar+f_t), top panel) tracks the actual unemployment rate at every cyclical in...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C12</code></td><td>supporting</td><td>figure</td>
+            <td class="st" style="color: #57606a">not attempted</td>
+            <td>deterministic</td>
+            <td>No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Figure 3 (prime-age men 25-54) requires CPS microdata restricted to that demographic; the package ships only whole-population BLS aggregat...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C13</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>Plan step 7 (figure4_compare.py) reproduced the Figure 4 cross-check and wrote output/figure4.json, which reports corr_F_UE = 0.9474 and mean_logdiff_F_UE = 0.32046 (log units) over the overlapping quarterly sample 1967.25-2004.75 (n=151...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C14</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>Plan step 7 (figure4_compare.py, verifies C14) produced output/figure4.json with corr_X_EU=0.8503 and mean_logdiff_X_EU=0.5862 (i.e. X_t averages ~58.6 log points above Lambda^EU) on the overlapping quarterly sample 1967.25-2004.75 (n=15...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C15</code></td><td>supporting</td><td>figure</td>
+            <td class="st" style="color: #9a6700">partial</td>
+            <td>agent</td>
+            <td>output/figure4.pdf was produced and is the correct figure: two stacked panels, the top comparing the two-state job-finding probability F_t with the three-state UE transition probability (1-e^{-lambda^UE}), and the bottom comparing the tw...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C16</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>Plan step 6 ran three_state_decomp.py on the shipped six instantaneous transition-rate series (ei/eu/ie/iu/ue/ui .dat, 151 quarters 1967Q2-2004Q4) — the notebook&#39;s already-time-aggregated lambda outputs used as the entry point since the ...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C17</code></td><td>supporting</td><td>table</td>
+            <td class="st" style="color: #9a6700">partial</td>
+            <td>agent</td>
+            <td>The run produced output/table2.json (the expected output/table2.csv was not written, but an equivalent JSON table exists), giving the six-transition-rate decomposition for the urate and emp_pop_ratio, each in a &#39;full&#39; and &#39;1987&#39; column. ...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C18</code></td><td>supporting</td><td>qualitative</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>The three quantitative sub-claims of the decomposition are unambiguously demonstrated by the produced output/table2.json. In the full-sample unemployment-rate column, lambda^UE=0.504 (squarely in the expected ~0.49-0.51 &#39;about half&#39; band...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C19</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #9a6700">partial</td>
+            <td>agent</td>
+            <td>The run produced all four three-state coefficients for the employment-population ratio (full sample) in output/table2.json under emp_pop_ratio.full: UE=1.0397, IE=0.6435, EU=0.4202, EI=-0.3129. Compared to paper values (UE 1.05, IE 0.69,...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C20</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #8250df">out of scope</td>
+            <td>deterministic</td>
+            <td>No plan step targeted this claim; treated as out_of_scope (excluded from the score, not a failure): Alternative job-finding measures M_t (medium-term-unemployment based) and D_t (mean-duration based) are reconstructable from public FRED ...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C21</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #57606a">not attempted</td>
+            <td>deterministic</td>
+            <td>No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Job-loser-share and reason-for-unemployment job-finding rates and the F^comp/F^real decomposition require CPS microdata by reason for unem...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C22</code></td><td>supporting</td><td>figure</td>
+            <td class="st" style="color: #57606a">not attempted</td>
+            <td>deterministic</td>
+            <td>No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Figure 9 (real vs compositional job finding across seven observable dimensions) requires the CPS microdata cross-tabulations; the package ...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C23</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #57606a">not attempted</td>
+            <td>deterministic</td>
+            <td>No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Three-state EU+EI sums, employer-to-employer transitions, and the quarterly job-destruction rate rely on gross-flow microdata plus externa...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C24</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #57606a">not attempted</td>
+            <td>deterministic</td>
+            <td>No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Short-term-unemployment shares in the full CPS vs incoming rotation groups (1976-1993 vs 1994-2010) require CPS microdata tabulated by rot...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C25</code></td><td>supporting</td><td>scalar</td>
+            <td class="st" style="color: #57606a">not attempted</td>
+            <td>deterministic</td>
+            <td>No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Comparison against Bleakley&#39;s independent gross-flow estimates requires Bleakley&#39;s series, which is not included in the package (checked g...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C26</code></td><td>supporting</td><td>figure</td>
+            <td class="st" style="color: #8250df">out of scope</td>
+            <td>deterministic</td>
+            <td>No plan step targeted this claim; treated as out_of_scope (excluded from the score, not a failure): Figure 7 (three alternative job-finding measures F_t, D_t, M_t) is reconstructable from public FRED data but the package ships no code fo...</td>
+          </tr>
+        
+          <tr>
+            <td><code>C27</code></td><td>supporting</td><td>qualitative</td>
+            <td class="st" style="color: #1a7f37">match</td>
+            <td>agent</td>
+            <td>The reproduced X_t series produced by the step-2 two-state construction (output/two_state/sep.dat, the Figure 1 bottom-panel series) shows an unmistakable secular decline: annual means fall from ~0.044 in the early 1980s (peak 0.04899 at...</td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  
+  <details>
+    <summary>Replication run (7/7 steps, 0s)</summary>
+    <div class="inner">
+      <p class="sub">Python 3.12.8 · GPU NVIDIA RTX A6000 (x4, 49140 MiB each) · numpy 2.5.2, scipy 1.18.1, pandas 3.0.5, matplotlib 3.11.1, requests 2.34.2</p>
+      <table>
+        <thead><tr><th>Step</th><th>What it did</th><th>Result</th><th>Time</th></tr></thead>
+        <tbody><tr><td>1</td><td>Prepare working copy, unzip inputs, install deps, check for Wolfram kernel, inventory inputs.</td><td class="st" style="color: #1a7f37">ok</td><td>0s</td></tr><tr><td>2</td><td>Two-state job-finding (F, eq.4) and employment-exit (X, eq.5) construction on shipped 1951-2005 aggregate data; quarterly averages; Figures 1-2 and summary stats.</td><td class="st" style="color: #1a7f37">ok</td><td>0s</td></tr><tr><td>3</td><td>Table 1 decomposition on shipped-vintage series: hypothetical unemployment rates (only f varies / only x varies), HP-detrended, regressed on detrended actual urate; full and 1987 samples.</td><td class="st" style="color: #1a7f37">ok</td><td>0s</td></tr><tr><td>4</td><td>Reconstruct two-state inputs at full 1948-2010 scale from public FRED data (UNEMPLOY, CE16OV, UEMPLT5); apply Appendix-A short-term correction with shipped shortadj shares for 1976M1-2005M1, splice published UEMPLT5 for 2005M2-2010M12; re-run two-state construction.</td><td class="st" style="color: #1a7f37">ok</td><td>0s</td></tr><tr><td>5</td><td>Headline Table 1 decomposition at the paper&#39;s exact samples on the 1948-2010 reconstructed series: full 1948-2010, 1967-2010, 1976-2010, 1987-2010 (the four whole-population-aggregate columns).</td><td class="st" style="color: #1a7f37">ok</td><td>0s</td></tr><tr><td>6</td><td>Three-state (E/U/I) decomposition -- second half of three-state.nb on shipped quarterly lambda series. Steady-state urate &amp; emp-pop measures, six single-rate hypotheticals (eq.7/8), Table 2 OLS slopes on detrended measured actual rates, steady-state/actual correlation, Figure 5.</td><td class="st" style="color: #1a7f37">ok</td><td>0s</td></tr><tr><td>7</td><td>Figure 4 cross-check: convert shipped quarterly UE/EU instantaneous rates to full-month probabilities Lambda=1-exp(-lambda), compare Lambda^UE vs two-state F and Lambda^EU vs two-state X on the overlapping quarterly sample; report correlations and mean log-level differences; emit two-panel Figure 4.</td><td class="st" style="color: #1a7f37">ok</td><td>0s</td></tr></tbody>
+      </table>
+    </div>
+  </details>
+  
+
+  
+
+  <details>
+    <summary>Where to look (artifacts)</summary>
+    <div class="inner refs">
+      <p>The full machine-readable record is on disk next to this report:</p>
+      <ul>
+        <li><code>verify/verdicts.json</code> — every claim verdict, with the grader's cited rationale.</li>
+        <li><code>verify/replication_score.json</code> — the score and tier breakdown.</li>
+        <li><code>replication/replication_log.json</code> — step-by-step execution, with the fixes applied.</li>
+        <li><code>replication/codebase.diff</code> — every change made to the provided code.</li>
+        
+        
+        <li><code>replication/codebase/</code> — the patched code that was actually run.</li>
+      </ul>
+    </div>
+  </details>
+
+  <footer>Generated by Veritas</footer>
+</div>
+</body>
+</html>

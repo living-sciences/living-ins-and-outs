@@ -1,0 +1,49 @@
+{
+  "instruction_summary": "Produce a calibrated 2026 theory update for Shimer (2012): recalibrate the flow model's central parameters, add the smallest amendment (a rare state-dependent layoff regime) that reconciles the finding-driven original with the 2020 separation shock and the secular flow decline, and validate it out-of-sample.",
+  "completed": true,
+  "steps": [
+    {"description": "Rebuilt venv; read paper model section (eqs 4-5, Table 1 decomposition), replication report, and 001 artifacts", "command": "uv venv && uv pip install numpy scipy pandas statsmodels matplotlib requests; pdftotext paper.pdf", "exit_code": 0, "outputs": ["/workspace/.venv"]},
+    {"description": "Recalibrate era parameters (F,X,omega,rho,half-life,u*,steady-state corr); regime-conditional decomposition (broad + extreme layoff regime); monthly per-recession finding-vs-separation episode decomposition; OOS classifier pre-2015 -> 2015-2026", "command": "python analyze.py", "exit_code": 0, "outputs": ["results/era_calibration_full.csv", "results/episode_decomposition.csv", "results/regime_estimates.csv", "results/_analysis_summary.json"]},
+    {"description": "Assemble paper-era-vs-2026 calibration_table.csv and the 2-panel flagship figure (mechanism original-vs-updated; secular slowdown + rising persistence)", "command": "python finalize.py", "exit_code": 0, "outputs": ["results/calibration_table.csv", "results/fig1_theory_update.png", "results/fig1_theory_update.pdf"]},
+    {"description": "Wrote theory_update.md (publication-quality theory section, all claims labelled ESTIMATED/CALIBRATED/PROPOSED), report.md, result_card.json", "command": "(authoring)", "exit_code": 0, "outputs": ["results/theory_update.md", "report.md", "result_card.json"]}
+  ],
+  "key_results": {
+    "mean_X_paper_vs_2026": "0.033 -> 0.021 (secular decline continued)",
+    "mean_F_paper_vs_2026": "0.44 -> 0.32",
+    "adjustment_speed_omega": "0.47 -> 0.34 (monthly convergence speed)",
+    "persistence_rho": "0.53 -> 0.66 (half-life of u deviation 1.08 -> 1.66 months, +53%)",
+    "implied_steady_state_u": "0.071 -> 0.062 (lower natural rate)",
+    "steady_state_corr": "0.945 (1948-2010 qtrly-avg) -> 0.924 (2010-2026); 0.75 within 2020",
+    "beta_F_normal_regime": "0.90 (1987-2019) / 0.84 (2010-2026 excl-2020)",
+    "beta_F_layoff_inclusive": "0.54 (2010-2026 incl-2020)",
+    "three_state_EU_normal_to_2020": "0.16 -> 0.55",
+    "extreme_layoff_regime_prob_piL": "0.0021 (2 months in 940: Mar-Apr 2020)",
+    "x2020_separation_deviation_vs_history": "4.2x the pre-2015 record (xhat 1.66 vs 0.39)",
+    "sep_share_2020_vs_2008": "0.81 (2020) vs 0.17 (2008); <=0.27 every recession since 1990",
+    "sep_driven_hypothetical_u_peak_2020": "0.164 vs <=0.084 every other postwar recession",
+    "oos_classifier": "pre-2015-trained rule flags EXACTLY Mar-Apr 2020 in 2015-2026, no false positives"
+  },
+  "comparison_to_original": [
+    {"quantity": "mean employment-exit probability X_bar (secular level)", "original": "0.0334 (1948-2010)", "followup": "0.0211 (2010-2026)", "source_file": "/workspace/eval/followup/001-living-update/results/c2_descriptive.json", "note": "Shimer's flagged secular decline in X continued through 2026; recalibrated here."},
+    {"quantity": "beta_F two-state, layoff-inclusive recent window", "original": "0.538 (2010-2026 incl-2020)", "followup": "used as layoff-regime anchor beta_F^L", "source_file": "/workspace/eval/followup/001-living-update/results/estimates_by_window.csv", "note": "Cannot coexist with normal-regime 0.89 under a constant beta -> motivates the regime amendment."},
+    {"quantity": "3-state separation contribution lambda_EU", "original": "0.164 (1990-2019 normal)", "followup": "0.551 (2010-2026 incl-2020)", "source_file": "/workspace/eval/followup/001-living-update/results/estimates_by_window.csv", "note": "Regime anchor: separations dominate only across 2020."},
+    {"quantity": "steady-state approximation quality corr(u,u*)", "original": "~0.99 monthly (paper Section 2 text)", "followup": "0.945 (1948-2010 qtrly-avg) -> 0.924 (2010-2026); 0.75 within 2020", "source_file": "/workspace/inputs/paper.pdf (Section 2) / this study era_calibration_full.csv", "note": "Approximation degrades as adjustment speed omega falls; breaks in fast 2020 shock."},
+    {"quantity": "adjustment speed / unemployment persistence", "original": "implicit in paper (X_bar+F_bar ~ 0.47)", "followup": "omega 0.47 -> 0.34, rho 0.53 -> 0.66, half-life +53%", "source_file": "this study era_calibration_full.csv", "note": "New forward-looking implication: lower but stickier natural rate."}
+  ],
+  "artifacts": [
+    "results/theory_update.md",
+    "results/calibration_table.csv",
+    "results/episode_decomposition.csv",
+    "results/regime_estimates.csv",
+    "results/era_calibration_full.csv",
+    "results/fig1_theory_update.png",
+    "results/fig1_theory_update.pdf"
+  ],
+  "deviations": [
+    "No likelihood-based Markov-switching estimation (compute-modest instruction): pi_L is a frequency and regime beta's are the paper's OLS decomposition on regime subsamples / 001's windows -- calibration to moments 001 already produced, stated plainly.",
+    "beta_F^L magnitude is calibrated to the 2020-inclusive windows, not predicted out-of-sample: 2020 is the only extreme layoff episode on record, so a pre-2015 mixture under-predicts the 2015-2026 flip -- reported honestly as the tail-risk finding, not hidden.",
+    "2020 is a sub-quarterly event; analysis is deliberately monthly and the clipped March-2020 F-point is handled with a clip-immune separation hypothetical (per the known clip artifact; with the clip kept, recent steady-state corr spuriously collapses to 0.24).",
+    "Levels of F_bar/X_bar carry the duration-misreporting caveat inherited from 001; ratio-based omega/rho/u* are more robust than the levels.",
+    "Demographic heterogeneity (paper C4/Figure 3) untouched -- needs CPS microdata, out of scope as in 001."
+  ]
+}

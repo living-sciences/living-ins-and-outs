@@ -1,0 +1,16 @@
+{
+  "full": {
+    "finding_contribution": 0.7911537416649473,
+    "exit_contribution": 0.21699174705856233,
+    "sum": 1.0081454887235097,
+    "n_quarters": 216,
+    "period": "1951.00-2004.75"
+  },
+  "1987": {
+    "finding_contribution": 0.9523727428067557,
+    "exit_contribution": 0.04638117199035707,
+    "sum": 0.9987539147971127,
+    "n_quarters": 72,
+    "period": "1987.00-2004.75"
+  }
+}

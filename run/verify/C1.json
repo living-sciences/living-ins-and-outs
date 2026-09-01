@@ -1,0 +1,23 @@
+{
+  "claim_id": "C1",
+  "status": "match",
+  "structured": {
+    "replicated_value": {
+      "job_finding_share": 0.76,
+      "employment_exit_share": 0.25
+    },
+    "paper_value": {
+      "employment_exit_share": 0.24,
+      "job_finding_share": 0.77
+    },
+    "uncertainty": null,
+    "value_found": true
+  },
+  "rationale": "The reproduced Table 1 decomposition is in output/table1_1948_2010.json. The column-1 case (all workers, period '1948.00-2010.50') reports finding_contribution=0.7632 and exit_contribution=0.2453. Against the paper values (job_finding_share=0.77, employment_exit_share=0.24) these are within ~0.9% and ~2.2% relative error respectively, both well inside the 5% match band. The two rows sum to 1.0085, consistent with the claim's note that this is not an exact decomposition. The only fix recorded in fix_severity.json was a 'major' but conservative --splice_tail flag needed to extend the short-term series to the full 1948-2010 endpoint (the shipped microdata-share window ended 2005M1); this was required precisely to reproduce this headline full-sample result, uses the published level for the tail, and does not alter the core two-state estimation. The result faithfully reproduces the paper's central quantitative claim.",
+  "evidence_refs": [
+    "output/replication/codebase/output/table1_1948_2010.json",
+    "output/replication/codebase/output/table1_shipped.json",
+    "output/assess/fix_severity.json"
+  ],
+  "graded_by": "agent"
+}

@@ -1,0 +1,27 @@
+{
+  "claim_id": "C19",
+  "status": "partial",
+  "structured": {
+    "replicated_value": {
+      "EI": -0.3129,
+      "EU": 0.4202,
+      "IE": 0.6435,
+      "UE": 1.0397
+    },
+    "paper_value": {
+      "EI": -0.36,
+      "EU": 0.37,
+      "IE": 0.69,
+      "UE": 1.05
+    },
+    "uncertainty": null,
+    "value_found": true
+  },
+  "rationale": "The run produced all four three-state coefficients for the employment-population ratio (full sample) in output/table2.json under emp_pop_ratio.full: UE=1.0397, IE=0.6435, EU=0.4202, EI=-0.3129. Compared to paper values (UE 1.05, IE 0.69, EU 0.37, EI -0.36): UE matches within 1.0% relative error, but IE is off by 6.7%, EU by 13.6%, and EI by 13.1% \u2014 three of four fall outside the 5% match band yet all sit comfortably within the 30% partial band. The qualitative core of the claim reproduces: UE is by far the largest determinant (1.04), IE is the second (0.64), and the two exit rates roughly cancel (EU 0.42 largely offset by EI -0.31, netting +0.11, small relative to UE), matching the paper's stated near-cancellation. Note the reproduced sample span is 1967.25-2004.75 (per table2.json 'sample_span') rather than the paper's full 1967-2010, which likely explains part of the ~13% gap in the exit-rate magnitudes. Overall the pattern and the headline UE coefficient reproduce well but the exit-rate and IE magnitudes deviate beyond the match threshold, warranting a partial verdict.",
+  "evidence_refs": [
+    "output/replication/codebase/output/table2.json",
+    "output/analyze/replication_plan.json",
+    "output/assess/fix_severity.json"
+  ],
+  "graded_by": "agent"
+}

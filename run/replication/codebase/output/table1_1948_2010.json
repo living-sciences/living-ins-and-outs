@@ -1,0 +1,30 @@
+{
+  "1948": {
+    "finding_contribution": 0.7632017888645583,
+    "exit_contribution": 0.24530816480130296,
+    "sum": 1.0085099536658613,
+    "n_quarters": 251,
+    "period": "1948.00-2010.50"
+  },
+  "1948b": {
+    "finding_contribution": 0.8066991525841184,
+    "exit_contribution": 0.19838627168671372,
+    "sum": 1.005085424270832,
+    "n_quarters": 175,
+    "period": "1967.00-2010.50"
+  },
+  "1948c": {
+    "finding_contribution": 0.8381904956222954,
+    "exit_contribution": 0.1657671263922245,
+    "sum": 1.0039576220145199,
+    "n_quarters": 139,
+    "period": "1976.00-2010.50"
+  },
+  "1987": {
+    "finding_contribution": 0.8584421017841259,
+    "exit_contribution": 0.1437217446672932,
+    "sum": 1.002163846451419,
+    "n_quarters": 95,
+    "period": "1987.00-2010.50"
+  }
+}

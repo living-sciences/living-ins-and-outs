@@ -1,0 +1,19 @@
+{
+  "claim_id": "C6",
+  "status": "match",
+  "structured": {
+    "replicated_value": 40,
+    "paper_value": 40,
+    "uncertainty": null,
+    "value_found": true
+  },
+  "rationale": "The claim is a windowed, single-business-cycle amplitude: the job-finding probability F_t falls by about forty log points from a cyclical peak to the following trough 'during recent decades.' The pipeline's summary.json reports F_peak_to_trough_logpoints = 1.304 (output/two_state_1948_2010/summary.json), but that is a full-sample global max-to-min (the run log itself flags it as 'dominated by the 2009 spike ... a windowed statement'), so it is the wrong statistic for grading this claim. I instead read the reproduced quarterly F_t series (output/two_state_1948_2010/find_prob.q.dat) and computed peak-to-trough log swings for the recent-decade cyclical episodes: the early-1990s recession 1989.00->1992.25 falls 0.375 log points (F 0.498->0.342), the early-2000s recession 1999.75->2003.50 falls 0.460 (F 0.542->0.342), and the 1990->1992 sub-window 0.361. These typical recent-decade cycles center on ~0.40 (40 log points), matching the paper's 'about forty log points' essentially exactly. (The 2007-09 Great Recession is an outsized outlier at ~0.80 log points.) The reproduced F_t series is well validated: mean_F=0.441 vs paper 0.44, corr_urate_ss=0.983 vs 0.98, and the regenerated find.dat matches the shipped notebook output to 2.2e-16. The only fix (a --splice_tail for 2005M2-2010M12) is default-off and does not affect these pre-2005 cyclical amplitudes.",
+  "evidence_refs": [
+    "output/replication/codebase/output/two_state_1948_2010/find_prob.q.dat",
+    "output/replication/codebase/output/two_state_1948_2010/summary.json",
+    "output/replication/replication_log.json",
+    "output/analyze/replication_plan.json",
+    "output/assess/fix_severity.json"
+  ],
+  "graded_by": "agent"
+}

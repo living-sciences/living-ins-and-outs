@@ -1,0 +1,9 @@
+{
+  "claim_id": "C12",
+  "status": "not_attempted",
+  "structured": {},
+  "rationale": "No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Figure 3 (prime-age men 25-54) requires CPS microdata restricted to that demographic; the package ships only whole-population BLS aggregate txt series and gross-flow Stata scripts needing ~42GB of un-shipped CPS microdata (checked findsep/, grossflows/, and all 24 repo files).",
+  "evidence_refs": [],
+  "not_attempted_reason": "authors_missing",
+  "graded_by": "deterministic"
+}

@@ -1,0 +1,50 @@
+{
+  "instruction_summary": "Re-estimate Shimer (2012)'s job-finding-share (C1/C2 two-state) and gross-flows (C3 three-state) decompositions on CPS data through mid-2026 and visualize how the findings evolved over time.",
+  "completed": true,
+  "steps": [
+    {"description": "Rebuilt venv and installed numpy/scipy/pandas/statsmodels/matplotlib/requests", "command": "uv venv /workspace/.venv && uv pip install numpy scipy pandas statsmodels matplotlib requests", "exit_code": 0, "outputs": ["/workspace/.venv"]},
+    {"description": "Fetched 13 FRED series (3 stocks + duration check + 9 gross-flows) via keyless fredgraph.csv, NaN-preserving", "command": "python fetch_all.py", "exit_code": 0, "outputs": ["workspace/data/raw_fred.csv"]},
+    {"description": "Part 1 two-state: eq(4)/(5) with 1.1 redesign factor from 1994-01, 2020-03 clip, within-window HP(1e5) detrend, Newey-West(8) SEs; all windows + 20yr rolling + C2 descriptives", "command": "python run_part1.py", "exit_code": 0, "outputs": ["results/estimates_by_window.csv", "results/rolling_estimates.csv", "results/c2_descriptive.json", "results/quarterly_series.csv"]},
+    {"description": "Part 2 three-state: BLS flows -> monthly 3x3 transition matrices -> eigenvalue time-aggregation correction -> eq(7) decomposition across windows", "command": "python run_part2.py", "exit_code": 0, "outputs": ["results/three_state_estimates.csv"]},
+    {"description": "Assembled combined estimates, series_monthly.csv, flagship two-panel figure and window-comparison figure", "command": "python finalize.py", "exit_code": 0, "outputs": ["results/estimates_by_window.csv", "results/series_monthly.csv", "results/living_update.png", "results/living_update.pdf", "results/fig1_living_update.png", "results/fig2_window_comparison.png"]}
+  ],
+  "key_results": {
+    "anchor_beta_F_1948_2010": "0.769 (paper 0.77)",
+    "anchor_beta_F_1987_2010": "0.898 (paper 0.90)",
+    "mean_F_1948_2010": "0.4395 (paper 0.44)",
+    "beta_F_1987_2026_excl_2020": "0.892 (claim holds/strengthens through 2026)",
+    "beta_F_2010_2026_incl_2020": "0.538 (COVID layoff shock: separations won)",
+    "beta_X_2010_2026_incl_2020": "0.380 (largest exit contribution of any window)",
+    "beta_F_2010_2026_excl_2020": "0.843 (reverts to job-finding dominance)",
+    "three_state_UE_1990_2010": "0.520 (paper 1987-2010 = 0.51)",
+    "three_state_EU_1990_2010": "0.168 (paper 0.17)",
+    "X_secular_trend_2010_2026_per_year": "-0.00035 (decline continued, p<1e-20)"
+  },
+  "comparison_to_original": [
+    {"quantity": "beta_F 1948-2010 (headline C1)", "original": "0.763", "followup": "0.769", "source_file": "/workspace/eval/replication/codebase/output/table1_1948_2010.json", "note": "Both match paper 0.77; anchor gate passed."},
+    {"quantity": "beta_F 1987-2010 (C2)", "original": "0.858", "followup": "0.898", "source_file": "/workspace/eval/replication/codebase/output/table1_1948_2010.json", "note": "1.1-factor spec reproduces paper 0.90 more tightly than replication's published-tail splice."},
+    {"quantity": "mean job-finding prob F 1948-2010", "original": "0.4412", "followup": "0.4395", "source_file": "/workspace/eval/replication/replication_log.json (step 4)", "note": "Both ~ paper 0.44; matches spec dry-run 0.440."},
+    {"quantity": "three-state UE contribution", "original": "0.504 (1967-2004 shipped .dat)", "followup": "0.520 (1990-2010 BLS flows)", "source_file": "/workspace/eval/replication/codebase/output/table2.json", "note": "Different vintage/sample; both ~ paper 0.49-0.51."},
+    {"quantity": "beta_F extended to 2026 (post-paper)", "original": "n/a (paper ended 2010)", "followup": "0.892 excl-2020 / 0.762 incl-2020 (1987-2026)", "source_file": "results/estimates_by_window.csv", "note": "New: claim holds through 2026 except across the 2020 COVID layoff shock."}
+  ],
+  "artifacts": [
+    "results/living_update.png",
+    "results/living_update.pdf",
+    "results/fig1_living_update.png",
+    "results/fig2_window_comparison.png",
+    "results/estimates_by_window.csv",
+    "results/rolling_estimates.csv",
+    "results/series_monthly.csv",
+    "results/three_state_estimates.csv",
+    "results/quarterly_series.csv",
+    "results/c2_descriptive.json",
+    "results/findings.md"
+  ],
+  "deviations": [
+    "Used the spec-mandated x1.1 CPS-redesign factor on UEMPLT5 from 1994-01 (Appendix-A fn 38) instead of the seeded replication's microdata-share + published-tail splice; maintained as an assumption post-2010. Reproduces the anchors more tightly.",
+    "Within-window HP(1e5) detrending and Newey-West(8) SEs per spec, vs the replication's detrend-once-then-subset + plain OLS (coincide for the full-sample anchor).",
+    "Three-state update starts 1990-02 (BLS published flows) and cannot extend the paper's 1967 start; tests recent-decades conclusion only. Flows not margin-error adjusted.",
+    "2020-03 F clipped to 0.01 (only out-of-range month); 2025 shutdown gap (stocks miss 2025-10, flows miss 2025-10/11) dropped, never interpolated; 2025Q3/Q4 and 2026Q3 excluded from samples.",
+    "C4 demographic heterogeneity not updated (needs matched CPS microdata; out of scope)."
+  ]
+}

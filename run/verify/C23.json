@@ -1,0 +1,9 @@
+{
+  "claim_id": "C23",
+  "status": "not_attempted",
+  "structured": {},
+  "rationale": "No plan step targeted this claim; the planner marked it BLOCKED (counts as a reproducibility gap): Three-state EU+EI sums, employer-to-employer transitions, and the quarterly job-destruction rate rely on gross-flow microdata plus external E2E / job-destruction sources; none shipped and no code path present.",
+  "evidence_refs": [],
+  "not_attempted_reason": "authors_missing",
+  "graded_by": "deterministic"
+}

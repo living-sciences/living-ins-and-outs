@@ -1,0 +1,47 @@
+{
+  "schema": "sai.followup.result_card/v1",
+  "headline": "Updated through mid-2026, Shimer (2012) holds: job finding still explains ~89% of unemployment-rate fluctuations (β_F = 0.892, 1987–2026 excl-2020) — except the 2020 COVID layoff shock, where separations won (β_X = 0.38, 2010–2026 incl-2020).",
+  "status": "completed",
+  "metrics": [
+    {"label": "β_F, 1948–2010 anchor", "value": "0.769", "baseline": "0.77", "baseline_label": "paper Table 1 (replication 0.763)", "note": "Anchor gate passed; mean F = 0.4395 vs paper 0.44."},
+    {"label": "β_F, 1987–2026 (excl 2020)", "value": "0.892", "baseline": "0.90", "baseline_label": "paper 1987–2010 column", "note": "Claim holds/strengthens 16 years past the paper's data."},
+    {"label": "β_F, 2010–2026 (incl 2020)", "value": "0.538", "baseline": "0.843", "baseline_label": "same window excl-2020", "note": "COVID was a separation shock — the ins won for four quarters."},
+    {"label": "β_X, 2010–2026 (incl 2020)", "value": "0.380", "baseline": "0.112", "baseline_label": "same window excl-2020", "note": "Largest employment-exit contribution of any window in the study."},
+    {"label": "3-state UE share, 1990–2010", "value": "0.520", "baseline": "0.51", "baseline_label": "paper Table 2 (1987–2010)", "note": "EU 0.168 vs 0.17; UE ≈ half confirmed through 2026."}
+  ],
+  "tables": [
+    {"title": "Job-finding share β_F: paper anchors vs. extended to 2026",
+     "columns": ["Start year", "Paper →2010", "This study →2010", "→2026 excl-2020", "→2026 incl-2020"],
+     "rows": [
+       ["1948", "0.77", "0.769", "0.791", "0.738"],
+       ["1967", "0.83", "0.831", "0.846", "0.754"],
+       ["1976", "0.85", "0.847", "0.859", "0.754"],
+       ["1987", "0.90", "0.898", "0.892", "0.762"]
+     ],
+     "highlight_row": 3},
+    {"title": "Three-state contributions (this study, BLS flows)",
+     "columns": ["Rate", "1990–2010", "paper 1987–2010", "2010–2026 excl-2020", "2010–2026 incl-2020"],
+     "rows": [
+       ["UE", "0.520", "0.51", "0.421", "0.150"],
+       ["EU", "0.168", "0.17", "0.171", "0.551"],
+       ["UI", "0.152", "0.16", "0.144", "0.094"],
+       ["IU", "0.115", "0.13", "0.200", "0.195"]
+     ],
+     "highlight_row": 0}
+  ],
+  "figures": [
+    {"file": "results/fig1_living_update.png",
+     "caption": "Panel A: 20-year rolling job-finding (β_F, blue) and exit (β_X, orange) contribution shares at window end, 95% Newey–West CI; dashed lines are the incl-2020 variants diverging for windows that span COVID. Panel B: quarterly F_t and X_t (×10) 1948–2026 — the paper's Figure 1 extended 16 years. Grey band = paper's 1948–2010 sample; bars = NBER recessions.",
+     "alt": "Two stacked time-series panels. Top: beta_F rises from ~0.70 in the late 1960s to a stable ~0.90 after 2000 and through 2026, with dashed incl-2020 lines dropping to ~0.72 at the right edge; beta_X mirrors downward to ~0.10. Bottom: job-finding probability F swings procyclically around 0.44 falling to ~0.20 in 2020 then recovering; exit probability X trends down with a sharp 2020 spike."},
+    {"file": "results/fig2_window_comparison.png",
+     "caption": "Job-finding share β_F by start-year window: paper (grey), this study's →2010 anchor (light blue), extended to 2026 excluding 2020 (dark blue), and including 2020 (orange). Excl-2020 tracks or exceeds the paper; incl-2020 drops uniformly to ~0.74–0.76 because of the COVID layoff shock.",
+     "alt": "Grouped bar chart over four start-year windows (1948, 1967, 1976, 1987); the paper, anchor, and excl-2020 bars agree near 0.77–0.90 while the incl-2020 bars sit lower at 0.74–0.76."}
+  ],
+  "notes": [
+    "Maintained assumption: short-term unemployment (UEMPLT5) x1.1 from 1994-01 (Appendix-A footnote 38), carried through 2026.",
+    "F_t level fell to 0.33 post-2010; treat levels cautiously (duration-misreporting bias). Cyclicality (the β's) is robust.",
+    "2020-03 F clipped to 0.01 (only out-of-range month); 2025 shutdown gap dropped, never interpolated (stocks miss 2025-10, flows miss 2025-10/11).",
+    "Three-state update starts 1990 (BLS flows) and cannot extend the paper's 1967 start. C4 demographic heterogeneity not updated — needs matched CPS microdata."
+  ],
+  "report_file": "report.md"
+}

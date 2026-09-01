@@ -1,0 +1,35 @@
+{
+  "score": 0.6320754716981132,
+  "headline": {
+    "match": 2,
+    "partial": 1,
+    "no_match": 0,
+    "not_attempted": 0,
+    "not_applicable": 0,
+    "out_of_scope": 0,
+    "missing": 0
+  },
+  "supporting": {
+    "match": 11,
+    "partial": 4,
+    "no_match": 1,
+    "not_attempted": 6,
+    "not_applicable": 0,
+    "out_of_scope": 2,
+    "missing": 0
+  },
+  "total_claims": 27,
+  "counted_claims": 25,
+  "missing_verdicts": [],
+  "coverage": {
+    "total_claims": 27,
+    "scored": 25,
+    "out_of_scope": 2,
+    "not_applicable": 0,
+    "excluded_infra": 0,
+    "missing": 0
+  },
+  "flags": [
+    "2 claim(s) marked out_of_scope (planner did not target them) \u2014 excluded from the score, not counted as failures. Score is over the 25 attempted/blocked claim(s)."
+  ]
+}

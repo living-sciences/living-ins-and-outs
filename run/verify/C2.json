@@ -1,0 +1,24 @@
+{
+  "claim_id": "C2",
+  "status": "partial",
+  "structured": {
+    "replicated_value": {
+      "job_finding_share": 0.858,
+      "employment_exit_share": 0.144
+    },
+    "paper_value": {
+      "employment_exit_share": 0.1,
+      "job_finding_share": 0.9
+    },
+    "uncertainty": null,
+    "value_found": true
+  },
+  "rationale": "Step 5 (which verifies C2) produced output/table1_1948_2010.json, whose '1987' entry covers period 1987.00-2010.50 (95 quarters) \u2014 the paper's exact Table 1 column 4 sample \u2014 and reports finding_contribution=0.8584 and exit_contribution=0.1437 (sum 1.0022). Compared to the paper's job_finding_share=0.90 / employment_exit_share=0.10: the job-finding share (the headline figure, 0.858) is within ~4.7% relative error of 0.90 (a match-band result), but the complementary employment-exit share (0.144) is ~44% above 0.10, outside the 30% partial band for that key. The two shares are near-complementary (they sum to ~1), so the single deviation (finding at 0.858 rather than 0.90) drives both. The result reproduces the qualitative claim \u2014 job finding accounts for the vast majority (~86%) of 1987-2010 unemployment fluctuations and its relative importance has risen from the full-sample value (finding_contribution=0.763 for 1948-2010 in the same file) \u2014 but does not land precisely on 0.90/0.10. fix_severity.json notes one 'major' fix (a --splice_tail flag to extend the short-term series past the 2005M1 microdata-share window to reach 2010M12); this extension is what allows the 1987-2010 sample to reach the paper's endpoint, and the shipped (unextended) table1_shipped.json '1987' entry only ran 1987.00-2004.75 and gave 0.952/0.046, so the graded value relies on the reconstructed tail. Given one key matches and the complementary key is materially off, the honest verdict is partial.",
+  "evidence_refs": [
+    "output/replication/codebase/output/table1_1948_2010.json",
+    "output/replication/codebase/output/table1_shipped.json",
+    "output/analyze/replication_plan.json",
+    "output/assess/fix_severity.json"
+  ],
+  "graded_by": "agent"
+}

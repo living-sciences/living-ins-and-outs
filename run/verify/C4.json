@@ -1,0 +1,77 @@
+{
+  "claim_id": "C4",
+  "status": "partial",
+  "structured": {
+    "replicated_table": {
+      "columns": [
+        "all workers 1948-2010",
+        "all workers 1967-2010",
+        "all workers 1976-2010",
+        "all workers 1987-2010",
+        "men 25-54 1976-2010"
+      ],
+      "rows": [
+        {
+          "label": "x-bar/(x-bar+f_t) [job finding contribution]",
+          "values": [
+            0.76,
+            0.81,
+            0.84,
+            0.86,
+            null
+          ]
+        },
+        {
+          "label": "x_t/(x_t+f-bar) [employment exit contribution]",
+          "values": [
+            0.25,
+            0.2,
+            0.17,
+            0.14,
+            null
+          ]
+        }
+      ]
+    },
+    "paper_table": {
+      "columns": [
+        "all workers 1948-2010",
+        "all workers 1967-2010",
+        "all workers 1976-2010",
+        "all workers 1987-2010",
+        "men 25-54 1976-2010"
+      ],
+      "rows": [
+        {
+          "label": "x-bar/(x-bar+f_t) [job finding contribution]",
+          "values": [
+            0.77,
+            0.83,
+            0.85,
+            0.9,
+            0.69
+          ]
+        },
+        {
+          "label": "x_t/(x_t+f-bar) [employment exit contribution]",
+          "values": [
+            0.24,
+            0.17,
+            0.15,
+            0.1,
+            0.32
+          ]
+        }
+      ]
+    },
+    "value_found": true
+  },
+  "rationale": "The run produced output/table1_1948_2010.json (in the codebase output/ dir) with four of Table 1's five columns, computed on the reconstructed 1948-2010 series via the footnote-11 HP(1e5)/regression decomposition described in plan steps 3 and 5. Job-finding contributions reproduce the paper closely: col1 1948-2010 0.7632 vs 0.77 (0.9%), col2 1967-2010 0.8067 vs 0.83 (2.8%), col3 1976-2010 0.8382 vs 0.85 (1.4%), col4 1987-2010 0.8584 vs 0.90 (4.6%) \u2014 all within 5%. The employment-exit contributions drift outward for the smaller values: 0.2453 vs 0.24 (2.2%, match), 0.1984 vs 0.17 (16.7%, partial band), 0.1658 vs 0.15 (10.5%, partial band), and 0.1437 vs 0.10 (43.7%, beyond 30%). The fifth column, men 25-54 1976-2010 (paper 0.69/0.32), was never produced: no demographic/prime-age series exists anywhere in output/ or the codebase (grep for '25-54'/'prime' found nothing), and plan steps 3 and 5 explicitly scoped the run to 'the columns computable from whole-population aggregate data,' excluding the microdata-based prime-age sample. The specific check that col5 finding (0.69) exceed twice col5 exit (0.32) therefore cannot be evaluated. fix_severity.json notes one major fix (a --splice_tail extension to reach the 2010 endpoint), which underlies the full-sample series used here. With half the finding cells matching, exit cells spread across the partial and no-match bands, and one full column absent, the overall verdict is partial.",
+  "evidence_refs": [
+    "output/replication/codebase/output/table1_1948_2010.json",
+    "output/replication/codebase/output/table1_shipped.json",
+    "output/analyze/replication_plan.json",
+    "output/assess/fix_severity.json"
+  ],
+  "graded_by": "agent"
+}

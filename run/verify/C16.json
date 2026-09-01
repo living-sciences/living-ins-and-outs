@@ -1,0 +1,17 @@
+{
+  "claim_id": "C16",
+  "status": "match",
+  "structured": {
+    "replicated_value": 0.99,
+    "paper_value": 0.99,
+    "uncertainty": null,
+    "value_found": true
+  },
+  "rationale": "Plan step 6 ran three_state_decomp.py on the shipped six instantaneous transition-rate series (ei/eu/ie/iu/ue/ui .dat, 151 quarters 1967Q2-2004Q4) \u2014 the notebook's already-time-aggregated lambda outputs used as the entry point since the upstream lambda construction needs ~42GB CPS microdata plus Stata (absent). The run computed the three-state steady-state unemployment measure and correlated it (quarterly-averaged, aligned by date against FRED u/(u+e)) with the actual unemployment rate, writing corr_ss_urate = 0.9909969 to output/table2.json ('reference': 'measured u/(u+e) and EMRATIO from FRED, quarterly-averaged'; 'engine': 'python-port-of-three-state.nb'). The replication log step_id 6 note likewise states 'corr(steady-state urate, measured urate)=0.9910 (paper 0.99)'. Rounded to the claim's precision this is 0.99, exactly matching the paper value (0% relative error, well within the 5% band). fix_severity.json flags no fix in this code path.",
+  "evidence_refs": [
+    "output/replication/codebase/output/table2.json",
+    "output/replication/replication_log.json",
+    "output/analyze/replication_plan.json"
+  ],
+  "graded_by": "agent"
+}
