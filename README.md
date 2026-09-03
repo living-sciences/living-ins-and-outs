@@ -34,3 +34,14 @@ Replication scores measure whether claims reproduce under our agents' effort,
 not whether authors did anything wrong. Read the referee report's Notes and
 the per-claim verdicts in `run/verify/verdicts.json` before quoting any
 number.
+
+## Data sources for the extension studies
+
+The extension studies pulled fresh public data on August 24, 2026, all of it from FRED (Federal Reserve Bank of St. Louis). In full:
+
+- U.S. Bureau of Labor Statistics, Current Population Survey: Unemployment Level (UNEMPLOY), Number Unemployed for Less Than 5 Weeks (UEMPLT5), Employment Level (CE16OV), and Average Weeks Unemployed (UEMPMEAN), monthly, seasonally adjusted, January 1948 to July 2026, retrieved from FRED.
+- U.S. Bureau of Labor Statistics, Current Population Survey, Labor Force Flows (series LNS17000000, LNS17100000, LNS17200000, LNS17400000, LNS17500000, LNS17600000, LNS17800000, LNS17900000, LNS18000000), monthly, seasonally adjusted, February 1990 to July 2026, retrieved from FRED.
+- National Bureau of Economic Research, US Business Cycle Expansions and Contractions (recession chronology), used for figure shading.
+- Shimer's original replication materials (the Mathematica notebooks shipped with the paper), reused for the detrending and steady-state code conventions only; no original data files were reused.
+
+The theory update fetched no new data; it works entirely from the living update's constructed series.
